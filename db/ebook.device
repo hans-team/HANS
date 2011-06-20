@@ -1,0 +1,7 @@
+[Device Entry]
+Name = "Ebook"
+Notify = "Has conectado un ebook"
+Icon-Notify = ""
+Action = ""
+Recommend-Pkg = ""
+

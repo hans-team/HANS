@@ -27,6 +27,14 @@ import logging
 import ConfigParser
 import string
 import pynotify
+import os
+import re
+from utils import DeviceEntry
+
+import gettext
+from gettext import gettext as _
+gettext.textdomain('hans')
+
 
 #HANS_AVAILABLE_DT='@PREFIX@/share/hans/hans-dt-available.conf'
 #HANS_PATH_DB='@PREFIX@/share/hans/db/'
@@ -70,12 +78,25 @@ class HansCore():
             usage()
             sys.exit(2)
         
+        regexp = re.compile('[a-z]+-[a-z]+')
+        if not regexp.match(self.dev_type):
+            print "The device type must be device-'name_of_device'"
+            sys.exit(1)
+
+        self.device = self.dev_type.split("-")[1]
         if not self._checkDTavailable():
+            self._notify(self.device, _("The device '"+self.device+"' isn't controlled by HANS"))
             print "Way to create new device_type and new udev rules (coding)"
             sys.exit(0) #temporally, waiting for code
         
-        self.dev_type_conf=DeviceTypeConf(self.dev_type)
-        self._notify(self.dev_type_conf.getNotify())
+        self.filename_entry=HANS_PATH_DB+self.device+".device"
+        if os.path.exists(self.filename_entry):
+            self.dev_type_entry=DeviceEntry.DeviceEntry(self.filename_entry)
+        else:
+            self._notify(self.device, _("The device '"+self.device+"' hasn't associated entry file"))
+            print "Way to create new entry for "+self.device+" by user (coding)"
+            sys.exit(0) #temporally, waiting for code
+        self._notify(self.device, self.dev_type_entry.getNotify())
    
     def _checkDTavailable(self):
         infile = open(HANS_DT_AVAILABLE, 'r')
@@ -88,36 +109,14 @@ class HansCore():
         else:
             return False
 
-    def _notify(self, message):
-        notify = pynotify.Notification("HANS notification", message)
+    def _notify(self, device,  message):
+        notify = pynotify.Notification("HANS notification - "+device, message)
         notify.set_urgency(pynotify.URGENCY_CRITICAL)
         notify.set_category("device")
         
         if not notify.show():
             print "Failed to send notification"
             
-
-class DeviceTypeConf():
-        
-    def __init__(self, dev_type):
-        self.config = ConfigParser.ConfigParser()
-        self.config.read(HANS_PATH_DB+dev_type+".ini")
-        self.notify = self.config.get(dev_type, "notify")
-        self.icon_notify = self.config.get(dev_type, "icon-notify")
-        self.action = self.config.get(dev_type, "action")
-        self.recommend_pkg = self.config.get(dev_type, "recommned-pkg")
-        
-    def getNotify(self):
-        return self.notify
-
-    def getIconNotify(self):
-        return self.icon_notify
-   
-    def getAction(self):
-        return self.action
-
-    def getRecommendPkg(self):
-        return self.recommend_pkg
 
 
 def usage():

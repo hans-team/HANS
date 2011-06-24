@@ -1,0 +1,848 @@
+# USB Base Class FEh (Application Specific) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to several class
+# specifications found on the USB-IF website.  That specification defines the
+# usable set of SubClass and Protocol values.  Values outside of that defined
+# spec are reserved.  These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="fe", \
+	ATTRS{bDeviceSubClass}=="01", \
+	ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/firmware-upgrade", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="fe", \
+	ATTRS{bDeviceSubClass}=="02", \
+	ATTRS{bDeviceProtocol}=="00", \
+	ENV{MIMETYPE}="x-usb-device/irda-bridge", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="fe", \
+	ENV{MIMETYPE}="x-usb-device/application-specific", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="fe", \
+        ATTRS{bDeviceSubClass}=="03", \
+	ENV{MIMETYPE}="x-usb-device/test-and-measurement", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="fe", \
+        ATTRS{bDeviceSubClass}=="03", \
+        ATTRS{bDeviceProtocol}=="02", \
+	ENV{MIMETYPE}="x-usb-device/usb488-test-and-measurement", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_feh_end"
+
+# USB Base Class 01h (Audio) device HANS udev-rules file
+#
+# This base class is defined for Audio capable devices that conform to the Audio
+# Device Class Specification found on the USB-IF website. That specification
+# defines the usable set of SubClass and Protocol values. Values outside of that
+# defined spec are reserved. These class codes may only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="01", \
+        ATTRS{bDeviceSubClass}=="03", \
+	ENV{MIMETYPE}="x-usb-device/audio-midi-streaming", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="01", \
+        ATTRS{bDeviceSubClass}=="02", \
+	ENV{MIMETYPE}="x-usb-device/audio-streaming", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="01", \
+        ATTRS{bDeviceSubClass}=="01", \
+	ENV{MIMETYPE}="x-usb-device/audio-control", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_01h_end"
+
+# USB Base Class 0Ah (CDC-Data) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Communications
+# Device Class Specification found on the USB-IF website. That specification
+# defines the usable set of SubClass and Protocol values.Values outside of that
+# defined spec are reserved. These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="93", \
+	ENV{MIMETYPE}="x-usb-device/capi-2.0-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="fe", \
+	ENV{MIMETYPE}="x-usb-device/cdc-puf-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="31", \
+	ENV{MIMETYPE}="x-usb-device/hdlc-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="fd", \
+	ENV{MIMETYPE}="x-usb-device/host-based-data-driver", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="51", \
+	ENV{MIMETYPE}="x-usb-device/q.921-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="50", \
+	ENV{MIMETYPE}="x-usb-device/q.921m-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="52", \
+	ENV{MIMETYPE}="x-usb-device/q.921tm-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="91", \
+	ENV{MIMETYPE}="x-usb-device/q.932-euroisdn-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="32", \
+	ENV{MIMETYPE}="x-usb-device/transparent-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="92", \
+	ENV{MIMETYPE}="x-usb-device/v.120-v.24-rate-isdn-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="90", \
+	ENV{MIMETYPE}="x-usb-device/v.42bis-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+        ATTRS{bDeviceProtocol}=="ff", \
+	ENV{MIMETYPE}="x-usb-device/vendor-specific-data", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0a", \
+	ENV{MIMETYPE}="x-usb-device/cdc-data", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_0ah_end"
+
+# USB Base Class 02h (Communications and CDC Control) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Communications
+# Device Class Specification found on the USB-IF website. That specification
+# defines the usable set of SubClass and Protocol values. Values outside of that
+# defined spec are reserved.  Note that the Communication Device Class spec
+# requires some class code values (triples) to be used in Device Descriptors and
+# some to be used in Interface Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="07", \
+	ENV{MIMETYPE}="x-usb-device/atm-networking", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="05", \
+	ENV{MIMETYPE}="x-usb-device/capi-control", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="09", \
+	ENV{MIMETYPE}="x-usb-device/device-management", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="01", \
+	ENV{MIMETYPE}="x-usb-device/direct-line", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="0c", \
+        ATTRS{bDeviceProtocol}=="07", \
+	ENV{MIMETYPE}="x-usb-device/ethernet-emulation", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="06", \
+	ENV{MIMETYPE}="x-usb-device/ethernet-networking", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="0a", \
+	ENV{MIMETYPE}="x-usb-device/mobile-direct-line", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="fe", \
+	ENV{MIMETYPE}="x-usb-device/modem", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="05", \
+	ENV{MIMETYPE}="x-usb-device/modem-3g", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/modem-at-v.25ter", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="06", \
+	ENV{MIMETYPE}="x-usb-device/modem-cdma", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="04", \
+	ENV{MIMETYPE}="x-usb-device/modem-gsm", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="03", \
+	ENV{MIMETYPE}="x-usb-device/modem-pcca101", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="ff", \
+	ENV{MIMETYPE}="x-usb-device/modem-vendor-specific", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="04", \
+	ENV{MIMETYPE}="x-usb-device/multi-channel", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="0b", \
+	ENV{MIMETYPE}="x-usb-device/obex", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="03", \
+	ENV{MIMETYPE}="x-usb-device/telephone", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+        ATTRS{bDeviceSubClass}=="08", \
+	ENV{MIMETYPE}="x-usb-device/wireless-handset-control", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="02", \
+	ENV{MIMETYPE}="x-usb-device/communications", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_02h_end"
+
+# USB Base Class 0Dh (Content Security) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Content Security
+# Device Class Specification found on the USB-IF website. That specification
+# defines the usable set of SubClass and Protocol values. Values outside of that
+# defined spec are reserved. These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0d", \
+	ENV{MIMETYPE}="x-usb-device/content-security", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_0dh_end"
+
+# USB Base Class DCh (Diagnostic Device) device HANS udev-rules file
+#
+# This base class is defined for devices that diagnostic devices. There is
+# currently only one value defined. All other values are reserved. This class
+# code can be used in Device or Interface Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="dc", \
+	ENV{MIMETYPE}="x-usb-device/diagnostics", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_dch_end"
+
+# USB Base Class 03h (HID – Human Interface Device) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the HID Device Class
+# Specification found on the USB-IF website. That specification defines the
+# usable set of SubClass and Protocol values.   Values outside of that defined
+# spec are reserved. These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+KERNEL=="mouse*|mice*", \
+	ACTION=="add", \
+        ENV{MIMETYPE}="x-usb-device/mouse-hid", \
+        ENV{HANS_TAG}!="1", \
+        ENV{HANS_TAG}="1", \
+        RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="03", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="00", \
+	ENV{MIMETYPE}="x-usb-device/hid", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="03", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/keyboard-hid", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="03", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="02", \
+	ENV{MIMETYPE}="x-usb-device/mouse-hid", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="03", \
+	ENV{MIMETYPE}="x-usb-device/hid", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_03h_end"
+
+# USB Base Class 09h (Hub) device HANS udev-rules file
+#
+# This base class is defined for devices that are USB hubs and conform to the
+# definition in the USB specification.  That specification defines the complete
+# triples as shown below.  All other values are reserved.  These class codes can
+# only be used in Device Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="09", \
+        ATTRS{bDeviceSubClass}=="00", \
+        ATTRS{bDeviceProtocol}=="02", \
+	ENV{MIMETYPE}="x-usb-device/hub", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1"
+#	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_09h_end"
+
+# USB Base Class 06h (Still Imaging) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Imaging Device
+# Class Specification found on the USB-IF website. That specification defines
+# the usable set of SubClass and Protocol values.   Values outside of that
+# defined spec are reserved.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="06", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/ptp-imaging-device", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="06", \
+        ATTRS{bDeviceSubClass}=="01", \
+	ENV{MIMETYPE}="x-usb-device/still-image-capture", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="06", \
+	ENV{MIMETYPE}="x-usb-device/imaging-device", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_06h_end"
+
+# USB Base Class 08h (Mass Storage) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Mass Storage Device
+# Class Specification found on the USB-IF website. That specification defines
+# the usable set of SubClass and Protocol values. Values outside of that defined
+# spec are reserved. These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="08", \
+        ATTRS{bDeviceSubClass}=="06", \
+	ENV{MIMETYPE}="x-usb-device/usb-mass-storage", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="08", \
+	ENV{MIMETYPE}="x-usb-device/mass-storage", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_08h_end"
+
+# USB Base Class EFh (Miscellaneous) device HANS udev-rules file
+#
+# This base class is defined for miscellaneous device definitions. Values not
+# shown in the table below are reserved.  The use of these class codes (Device
+# or Interface descriptor) are specifically annotated in each entry below.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ef", \
+        ATTRS{bDeviceSubClass}=="03", \
+        ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/cable-based-association", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ef", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/interface-association", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ef", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/ms-activesync", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ef", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="02", \
+	ENV{MIMETYPE}="x-usb-device/palm-sync", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ef", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="02", \
+	ENV{MIMETYPE}="x-usb-device/wire-adapter-multifunction", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ef", \
+        ATTRS{bDeviceSubClass}=="02", \
+	ENV{MIMETYPE}="x-usb-device/miscellanous-common", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ef", \
+	ENV{MIMETYPE}="x-usb-device/miscellanous", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_efh_end"
+
+# USB Base Class 0Fh (Personal Healthcare) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Personal Healthcare
+# Device Class Specification found on the USB-IF website. That specification
+# defines the usable set of SubClass and Protocol values. Values outside of that
+# defined spec are reserved. These class codes should only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0F", \
+	ENV{MIMETYPE}="x-usb-device/personal-healthcare", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_0fh_end"
+
+# USB Base Class 05h (Physical) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Physical Device
+# Class Specification found on the USB-IF website. That specification defines
+# the usable set of SubClass and Protocol values.  Values outside of that
+# defined spec are reserved. These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="05", \
+	ENV{MIMETYPE}="x-usb-device/physical", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_05h_end"
+
+# USB Base Class 07h (Printer) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Printer Device
+# Class Specification found on the USB-IF website.  That specification defines
+# the usable set of SubClass and Protocol values.  Values outside of that
+# defined spec are reserved.  These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="07", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="ff", \
+	ENV{MIMETYPE}="x-usb-device/printer", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_07h_end"
+
+# USB Base Class 0Bh (Smart Card) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Smart Card Device
+# Class Specification found on the USB-IF website. That specification defines
+# the usable set of SubClass and Protocol values.Values outside of that defined
+# spec are reserved. These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0B", \
+	ENV{MIMETYPE}="x-usb-device/smart-card", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_0bh_end"
+
+# USB Base Class 0Eh (Video) device HANS udev-rules file
+#
+# This base class is defined for devices that conform to the Video Device Class
+# Specification found on the USB-IF website. That specification defines the
+# usable set of SubClass and Protocol values. Values outside of that defined
+# spec are reserved. These class codes can only be used in Interface
+# Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0e", \
+        ATTRS{bDeviceSubClass}=="01", \
+	ENV{MIMETYPE}="x-usb-device/video-control", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0e", \
+        ATTRS{bDeviceSubClass}=="03", \
+	ENV{MIMETYPE}="x-usb-device/video-interface-collection", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0e", \
+        ATTRS{bDeviceSubClass}=="02", \
+	ENV{MIMETYPE}="x-usb-device/video-streaming", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="0e", \
+	ENV{MIMETYPE}="x-usb-device/video", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_0eh_end"
+
+# USB Base Class E0h (Wireless Controller) device HANS udev-rules file
+#
+# This base class is defined for devices that are Wireless controllers. Values
+# not shown in the table below are reserved. These class codes are to be used in
+# Interface Descriptors, with the exception of the Bluetooth class code which
+# can also be used in a Device Descriptor. 
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="E0", \
+	ATTRS{bDeviceSubClass}=="01", \
+	ATTRS{bDeviceProtocol}=="03", \
+	ENV{MIMETYPE}="x-usb-device/remote-ndis", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="E0", \
+	ATTRS{bDeviceSubClass}=="01", \
+	ATTRS{bDeviceProtocol}=="04", \
+	ENV{MIMETYPE}="x-usb-device/bluetooth-amp-controller", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="E0", \
+	ATTRS{bDeviceSubClass}=="02", \
+	ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/host-wire-control-data", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="E0", \
+	ATTRS{bDeviceSubClass}=="02", \
+	ATTRS{bDeviceProtocol}=="02", \
+	ENV{MIMETYPE}="x-usb-device/device-wire-control-data", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="e0", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="01", \
+	ENV{MIMETYPE}="x-usb-device/bluetooth-adapter", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="e0", \
+        ATTRS{bDeviceSubClass}=="01", \
+        ATTRS{bDeviceProtocol}=="02", \
+	ENV{MIMETYPE}="x-usb-device/ultra-wideband-radio-control", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="e0", \
+        ATTRS{bDeviceSubClass}=="02", \
+        ATTRS{bDeviceProtocol}=="03", \
+	ENV{MIMETYPE}="x-usb-device/wireless-usb-wire-adapter", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="e0", \
+	ENV{MIMETYPE}="x-usb-device/wireless-adapter", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="e0", \
+        ATTRS{bDeviceSubClass}=="01", \
+	ENV{MIMETYPE}="x-usb-device/wireless-radio", \
+        ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_e0h_end"
+
+# USB Base Class FFh (Vendor Specific) device HANS udev-rules file
+#
+# This base class is defined for vendors to use as they please.  These class
+# codes can be used in both Device and Interface Descriptors.
+#
+# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ff|00", \
+	ATTRS{bDeviceSubClass}=="00", \
+	ATTRS{bDeviceProtocol}=="00", \
+	ENV{MIMETYPE}="x-usb-device/vendor-specific", \
+	ENV{HANS_TAG}!="1", \
+	ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="usbclass_ffh_end"

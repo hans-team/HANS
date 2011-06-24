@@ -1,0 +1,14 @@
+# this is a template file for use as base to create HANS udev-rules
+
+ENV{HANS_TAG}=="1", GOTO="hans_end"
+
+ACTION=="add", SUBSYSTEM=="usb", \
+	ATTRS{bDeviceClass}=="ff", \
+	ATTRS{bDeviceSubClass}=="00", \
+	ATTRS{bDeviceProtocol}=="00", \
+	ENV{MIMETYPE}="x-device/vendor-specific", \
+	ENV{HANS_TAG}!="1",  \
+        ENV{HANS_TAG}="1", \
+	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+
+LABEL="hans_end"

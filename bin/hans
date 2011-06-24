@@ -29,17 +29,26 @@ import string
 import pynotify
 import os
 import re
-from utils import DeviceEntry
 
 import gettext
 from gettext import gettext as _
 gettext.textdomain('hans')
 
+# Add project root directory (enable symlink, and trunk execution).
+PROJECT_ROOT_DIRECTORY = os.path.abspath(
+    os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
+
+if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
+    and PROJECT_ROOT_DIRECTORY not in sys.path):
+    sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
+    os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
+
+
+from hans import (DeviceEntry, NewDeviceEntry)
 
 #HANS_AVAILABLE_DT='@PREFIX@/share/hans/hans-dt-available.conf'
 #HANS_PATH_DB='@PREFIX@/share/hans/db/'
-HANS_PATH_DB='db/'
-HANS_DT_AVAILABLE='hans-dt-available.conf'
+HANS_PATH_DB=PROJECT_ROOT_DIRECTORY+'/db/'
 TEXTBUFFER_LOGGER = 'hans-core'
 LOG_LEVEL = logging.DEBUG
 LOG_FORMAT = '%(asctime)s %(levelname)s - %(message)s'
@@ -50,8 +59,8 @@ class HansCore():
 
     def main(self,argvs):
         try:
-            options, remainder = getopt.gnu_getopt(argvs, 't:p:', ['type=', 
-                                                             'path=',
+            options, remainder = getopt.gnu_getopt(argvs, 't:p:n', ['type=', 
+                                                             'path=', 'new',
                                                              ])
         except getopt.GetoptError:
             usage()
@@ -65,15 +74,21 @@ class HansCore():
             sys.exit(1)
 
         opttype=False
+        optnew=False
 
         for opt, arg in options:
             if opt in ('-t', '--type'):
                 opttype=True
                 self.dev_type = arg
-            elif opt in ('-p', '-path'):
+            elif opt in ('-p', '--path'):
                 self.path_dev = arg
+            elif opt in ('-n', '--new'):
+                optnew=True
+                self._newDevice()
+
+
         
-        if not opttype:
+        if not optnew and not opttype:
             print "[-t|--type] options is required"
             usage()
             sys.exit(2)
@@ -84,10 +99,10 @@ class HansCore():
             sys.exit(1)
 
         self.device = self.dev_type.split("-")[1]
-        if not self._checkDTavailable():
-            self._notify(self.device, _("The device '"+self.device+"' isn't controlled by HANS"))
-            print "Way to create new device_type and new udev rules (coding)"
-            sys.exit(0) #temporally, waiting for code
+#        if not self._checkDTavailable():
+#            self._notify(self.device, _("The device '"+self.device+"' isn't controlled by HANS"))
+#            print "Way to create new device_type and new udev rules (coding)"
+#            sys.exit(0) #temporally, waiting for code
         
         self.filename_entry=HANS_PATH_DB+self.device+".device"
         if os.path.exists(self.filename_entry):
@@ -96,18 +111,18 @@ class HansCore():
             self._notify(self.device, _("The device '"+self.device+"' hasn't associated entry file"))
             print "Way to create new entry for "+self.device+" by user (coding)"
             sys.exit(0) #temporally, waiting for code
-        self._notify(self.device, self.dev_type_entry.getNotify())
+        self._notify(self.dev_type_entry.getName(), self.dev_type_entry.getNotify())
    
-    def _checkDTavailable(self):
-        infile = open(HANS_DT_AVAILABLE, 'r')
-        hans_dt_available = list()
-        for line in infile:
-            hans_dt_available.append(line.strip('\n'))
-        infile.close()
-        if self.dev_type in hans_dt_available:
-            return True
-        else:
-            return False
+#    def _checkDTavailable(self):
+#        infile = open(HANS_DT_AVAILABLE, 'r')
+#        hans_dt_available = list()
+#        for line in infile:
+#            hans_dt_available.append(line.strip('\n'))
+#        infile.close()
+#        if self.dev_type in hans_dt_available:
+#            return True
+#        else:
+#            return False
 
     def _notify(self, device,  message):
         notify = pynotify.Notification("HANS notification - "+device, message)
@@ -116,6 +131,12 @@ class HansCore():
         
         if not notify.show():
             print "Failed to send notification"
+
+    def _newDevice(self):
+        new = NewDeviceEntry.NewDeviceEntry()
+        response = new.run()
+        new.destroy()
+        sys.exit(0)
             
 
 

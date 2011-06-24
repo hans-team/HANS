@@ -15,7 +15,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/firmware-upgrade", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="fe", \
@@ -24,14 +24,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/irda-bridge", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="fe", \
 	ENV{MIMETYPE}="x-usb-device/application-specific", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="fe", \
@@ -39,7 +39,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/test-and-measurement", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="fe", \
@@ -48,7 +48,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/usb488-test-and-measurement", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_feh_end"
 
@@ -68,7 +68,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/audio-midi-streaming", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="01", \
@@ -76,7 +76,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/audio-streaming", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="01", \
@@ -84,7 +84,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/audio-control", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_01h_end"
 
@@ -104,7 +104,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/capi-2.0-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -112,7 +112,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/cdc-puf-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -120,7 +120,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/hdlc-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -128,7 +128,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/host-based-data-driver", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -136,7 +136,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/q.921-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -144,7 +144,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/q.921m-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -152,7 +152,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/q.921tm-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -160,7 +160,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/q.932-euroisdn-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -168,7 +168,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/transparent-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -176,7 +176,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/v.120-v.24-rate-isdn-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -184,7 +184,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/v.42bis-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
@@ -192,14 +192,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/vendor-specific-data", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0a", \
 	ENV{MIMETYPE}="x-usb-device/cdc-data", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_0ah_end"
 
@@ -220,7 +220,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/atm-networking", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -228,7 +228,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/capi-control", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -236,7 +236,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/device-management", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -244,7 +244,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/direct-line", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -253,7 +253,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/ethernet-emulation", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -261,7 +261,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/ethernet-networking", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -269,7 +269,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/mobile-direct-line", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -278,7 +278,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/modem", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -287,7 +287,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/modem-3g", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -296,7 +296,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/modem-at-v.25ter", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -305,7 +305,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/modem-cdma", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -314,7 +314,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/modem-gsm", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -323,7 +323,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/modem-pcca101", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -332,7 +332,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/modem-vendor-specific", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -340,7 +340,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/multi-channel", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -348,7 +348,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/obex", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -356,7 +356,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/telephone", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
@@ -364,14 +364,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/wireless-handset-control", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="02", \
 	ENV{MIMETYPE}="x-usb-device/communications", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_02h_end"
 
@@ -390,7 +390,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/content-security", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_0dh_end"
 
@@ -407,7 +407,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/diagnostics", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_dch_end"
 
@@ -426,7 +426,7 @@ KERNEL=="mouse*|mice*", \
         ENV{MIMETYPE}="x-usb-device/mouse-hid", \
         ENV{HANS_TAG}!="1", \
         ENV{HANS_TAG}="1", \
-        RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+        RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="03", \
@@ -435,7 +435,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/hid", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="03", \
@@ -444,7 +444,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/keyboard-hid", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="03", \
@@ -453,14 +453,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/mouse-hid", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="03", \
 	ENV{MIMETYPE}="x-usb-device/hid", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_03h_end"
 
@@ -480,7 +480,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/hub", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1"
-#	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+#	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_09h_end"
 
@@ -500,7 +500,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/ptp-imaging-device", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="06", \
@@ -508,14 +508,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/still-image-capture", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="06", \
 	ENV{MIMETYPE}="x-usb-device/imaging-device", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_06h_end"
 
@@ -535,14 +535,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/usb-mass-storage", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="08", \
 	ENV{MIMETYPE}="x-usb-device/mass-storage", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_08h_end"
 
@@ -562,7 +562,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/cable-based-association", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 
 ACTION=="add", SUBSYSTEM=="usb", \
@@ -572,7 +572,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/interface-association", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="ef", \
@@ -581,7 +581,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/ms-activesync", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="ef", \
@@ -590,7 +590,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/palm-sync", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="ef", \
@@ -599,7 +599,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/wire-adapter-multifunction", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="ef", \
@@ -607,14 +607,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/miscellanous-common", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="ef", \
 	ENV{MIMETYPE}="x-usb-device/miscellanous", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_efh_end"
 
@@ -633,7 +633,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/personal-healthcare", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_0fh_end"
 
@@ -652,7 +652,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/physical", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_05h_end"
 
@@ -673,7 +673,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/printer", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_07h_end"
 
@@ -692,7 +692,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/smart-card", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_0bh_end"
 
@@ -712,7 +712,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/video-control", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0e", \
@@ -720,7 +720,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/video-interface-collection", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0e", \
@@ -728,14 +728,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/video-streaming", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="0e", \
 	ENV{MIMETYPE}="x-usb-device/video", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_0eh_end"
 
@@ -755,7 +755,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/remote-ndis", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="E0", \
@@ -764,7 +764,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/bluetooth-amp-controller", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="E0", \
@@ -773,7 +773,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/host-wire-control-data", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="E0", \
@@ -782,7 +782,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/device-wire-control-data", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="e0", \
@@ -791,7 +791,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/bluetooth-adapter", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="e0", \
@@ -800,7 +800,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/ultra-wideband-radio-control", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="e0", \
@@ -809,14 +809,14 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/wireless-usb-wire-adapter", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="e0", \
 	ENV{MIMETYPE}="x-usb-device/wireless-adapter", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTRS{bDeviceClass}=="e0", \
@@ -824,7 +824,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/wireless-radio", \
         ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_e0h_end"
 
@@ -843,6 +843,6 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	ENV{MIMETYPE}="x-usb-device/vendor-specific", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans $env{MIMETYPE} $devpath"
+	RUN+="/usr/bin/hans -t $env{MIMETYPE} -p $devpath"
 
 LABEL="usbclass_ffh_end"

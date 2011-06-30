@@ -1,28 +1,14 @@
-"""
-Complete implementation of the XDG Device Entry Specification Version 1.0
-
-Standard Keys:
-
-Name = Generic name device
-Notify = Messenge to notify the system
-Icon-Notify = Icon for notification
-Action = Action that is associated with the device. Can be run scripts, install libraries, request some information to user...
-Recommend-Pkg = This key provides a list of packages that are recommended installed in the system
-
-"""
-
-from xdg.IniFile import *
 import os.path
+from hans import DeviceClassDB
 
 
-class DeviceEntry(IniFile):
-    "Class to parse and validate DesktopEntries"
+class DeviceClass():
 
-    defaultGroup = 'Device Entry'
 
-    def __init__(self, filename=None):
-        self.content = dict()
-        self.parse(filename)
+    def __init__(self, sysfspath):
+        self.sysfspath(sysfspath)
+        self.checkKnowDeviceClass(sysfspath)
+        
 
     def __str__(self):
         return self.getName()

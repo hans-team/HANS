@@ -1,6 +1,8 @@
 
 
-import os, shlex, subprocess
+import os
+import shlex
+import subprocess
 
 def get_instance(action_entry):
     return DefaultAction(action_entry)
@@ -11,10 +13,6 @@ class DefaultAction():
         self._action_entry = action_entry
 
     def execute(self, udev_item):
-#        cmd = self._action_entry.getExec()
-#        args = [udev_item.getName()]
-#        os.execv(cmd, args)
-
-        cmd = self._action_entry.getExec() + ' "' + udev_item.getName() + '"'
+        cmd = self._action_entry.getExec()
         args = shlex.split(cmd)
         p = subprocess.Popen(args)

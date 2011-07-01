@@ -3,12 +3,8 @@
 import os
 
 import ActionSelectorDialog
+from . import (DeviceEntry, InterfaceEntry)
 from actions import *
-
-
-class DeviceEntry:
-    def __init__(self):
-        pass
 
 class ActionLauncher:
 
@@ -27,18 +23,18 @@ class ActionLauncher:
 
     def execute(self, action_name):
 
-        if isinstance(self._udev_item, DeviceEntry):
+        if isinstance(self._udev_item, DeviceEntry.DeviceEntry):
             action_name = 'Notify'
             action_entry = ActionEntry()
             action_entry.setName(action_name)
 
-        elif isinstance(self._udev_item, InterfaceEntry):
-            action_list = udev_item.get_actions()
+        elif isinstance(self._udev_item, InterfaceEntry.InterfaceEntry):
+            action_list = self._udev_item.get_actions()
             action_entry = action_list[action_name]
 
         action_instance = self._get_action_instance(action_entry)
         if action_instance != None:
-            action_instance.execute()
+            action_instance.execute(self._udev_item)
 
     def _get_action_instance(self, action):
         try:
@@ -46,10 +42,7 @@ class ActionLauncher:
             action_module = globals()[action_name]
         except KeyError, e:
             action_name = 'DefaultAction'
-        action_module = globals()[action_name]
+            action_module = globals()[action_name]
         a = action_module.get_instance(action)
         return a
 
-def get_action_launcher(udev_item):
-    launcher = ActionLauncher(udev_item)
-    return launcher

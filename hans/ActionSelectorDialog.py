@@ -30,6 +30,7 @@ class ActionSelectorDialog(gtk.Dialog):
         new_object = builder.get_object('ActionSelectorDialog')
         new_object._treeviewActions = builder.get_object('treeviewActions')
         new_object._lblDescription = builder.get_object('lblDescription')
+        new_object._btnExec = builder.get_object('btnExec')
         new_object.finish_initializing(builder)
         return new_object
 
@@ -49,14 +50,7 @@ class ActionSelectorDialog(gtk.Dialog):
         self._set_is_default = togglebutton.get_active()
 
     def on_btnExecClicked(self, button):
-
-        treeselection = self._treeviewActions.get_selection()
-        (model, iter) = treeselection.get_selected()
-
-        if iter == None:
-            return
-
-        self._selected_action = model.get_value(iter, 0)
+        self._set_selected_action()
 
     def on_btnCancelClicked(self, button):
         pass
@@ -67,6 +61,20 @@ class ActionSelectorDialog(gtk.Dialog):
     def get_is_default_action(self):
         return self._set_is_default
 
+    def on_treeviewActionsRowActivated(self, treeview, path, user_param1):
+        self._set_selected_action()
+        self.response(self.get_response_for_widget(self._btnExec))
+
+    def _set_selected_action(self):
+
+        treeselection = self._treeviewActions.get_selection()
+        (model, iter) = treeselection.get_selected()
+
+        if iter == None:
+            return
+
+        self._selected_action = model.get_value(iter, 0)
+
     def _load_actions(self):
 
         try:
@@ -74,6 +82,7 @@ class ActionSelectorDialog(gtk.Dialog):
         except Exception, e:
             return
 
+        self._treeviewActions.connect('row-activated', self.on_treeviewActionsRowActivated)
         tvcolumn = gtk.TreeViewColumn('Actions')
 
         cell = gtk.CellRendererPixbuf()

@@ -20,7 +20,7 @@ import ActionEntry
 class InterfaceEntry(IniFile):
     "Class to parse and validate DesktopEntries"
 
-    defaultGroup = 'Device Entry'
+    defaultGroup = 'Interface Entry'
 
     def __init__(self, filename=None):
         self.content = dict()
@@ -30,7 +30,7 @@ class InterfaceEntry(IniFile):
         return self.getName()
 
     def parse(self, file):
-        IniFile.parse(self, file, ["Device Entry"])
+        IniFile.parse(self, file, ["Interface Entry"])
 
     def get_actions(self):
 

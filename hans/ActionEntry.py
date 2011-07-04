@@ -44,6 +44,21 @@ class ActionEntry(IniFile):
     def setExec(self, s_exec):
         self.set('Exec', s_exec)
 
+    def getInteractive(self):
+        interactive = self.get('Interactive')
+        if interactive.lower() == 'true' or (type(interactive) == int and interactive != 0):
+            interactive = True
+        else:
+            interactive = False
+        print interactive, type(interactive)
+        return interactive
+    def setInteractive(self, interactive):
+        if interactive.lower() == 'true' or (type(interactive) == int and interactive != 0):
+            interactive = 'true'
+        else:
+            interactive = 'false'
+        self.set('Interactive', interactive)
+
     def getMimetype(self):
         return self.get('MimeType')
     def setMimetype(self, mimetype):

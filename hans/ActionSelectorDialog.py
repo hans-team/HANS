@@ -18,7 +18,6 @@ class ActionSelectorDialog(gtk.Dialog):
         gtk.Dialog.__init__(self)
         self._iface = iface
         self._set_is_default = False
-        self._selected_action = None
 
         self._load_actions()
 
@@ -50,30 +49,31 @@ class ActionSelectorDialog(gtk.Dialog):
         self._set_is_default = togglebutton.get_active()
 
     def on_btnExecClicked(self, button):
-        self._set_selected_action()
+        # TODO: Do something with the get_is_default_action value
+        pass
 
     def on_btnCancelClicked(self, button):
         pass
 
-    def get_actions(self):
-        return self._selected_action
+    def on_treeviewActionsRowActivated(self, treeview, path, user_param1):
+        # TODO: Do something with the get_is_default_action value
+        self.response(self.get_response_for_widget(self._btnExec))
 
     def get_is_default_action(self):
         return self._set_is_default
 
-    def on_treeviewActionsRowActivated(self, treeview, path, user_param1):
-        self._set_selected_action()
-        self.response(self.get_response_for_widget(self._btnExec))
+    def get_selected_actions(self):
 
-    def _set_selected_action(self):
-
+        action_list = []
         treeselection = self._treeviewActions.get_selection()
-        (model, iter) = treeselection.get_selected()
+        (model, paths) = treeselection.get_selected_rows()
 
-        if iter == None:
-            return
+        for path in paths:
+            iter = model.get_iter(path)
+            value = model.get_value(iter, 0)
+            action_list.append(value.getName())
 
-        self._selected_action = model.get_value(iter, 0)
+        return action_list
 
     def _load_actions(self):
 
@@ -103,9 +103,11 @@ class ActionSelectorDialog(gtk.Dialog):
         action_list = self._iface.get_actions()
         for name in action_list:
             action = action_list[name]
-            treestore.append(None, [action])
+            if action.getInteractive():
+                treestore.append(None, [action])
 
         self._treeviewActions.set_model(treestore)
+        self._treeviewActions.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
 
     def _render_column_pixbuf(self, column, cell, model, iter):
         action = model.get_value(iter, 0)

@@ -13,6 +13,10 @@ class DefaultAction():
         self._action_entry = action_entry
 
     def execute(self, udev_item):
-        cmd = self._action_entry.getExec()
-        args = shlex.split(cmd)
-        p = subprocess.Popen(args)
+        try:
+            cmd = self._action_entry.getExec()
+            args = shlex.split(cmd)
+            p = subprocess.Popen(args)
+
+        except Exception, e:
+            raise e

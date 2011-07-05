@@ -8,22 +8,9 @@ from actions import *
 
 class ActionLauncher:
 
-    def __init__(self, udev_item):
-        self._udev_item = udev_item
-        self._action_list = udev_item.get_actions()
-        self._non_interactive_actions = {}
-
-        for action_name in self._action_list:
-            action = self._action_list[action_name]
-            if not action.getInteractive():
-                self._non_interactive_actions[action.getName()] = action
-
-    def show_selector_dialog(self):
-        dialog = ActionSelectorDialog.ActionSelectorDialog(self._udev_item)
-        dialog._btnExec.connect('clicked', self.on_btnExecClicked, dialog)
-        dialog._treeviewActions.connect('row-activated', self.on_treeviewActionsRowActivated, dialog)
-        ret = dialog.run()
-        dialog.destroy()
+    def __init__(self, interface_entry):
+        self._interface_entry = interface_entry
+        self._action_list = interface_entry.get_actions()
 
     def execute(self, action_list):
 
@@ -32,31 +19,30 @@ class ActionLauncher:
             if not action_name in self._action_list:
                 continue
 
-            action_entry = self._action_list[action_name]
-            action_instance = self._get_action_instance(action_entry)
+            try:
+                action_entry = self._action_list[action_name]
+                action_instance = self._get_action_instance(action_entry)
+                action_instance.execute(self._interface_entry)
 
-            if action_instance != None:
-                action_instance.execute(self._udev_item)
+            except Exception, e:
+                raise e
 
-    def execute_non_interactive(self):
-        self.execute(self._non_interactive_actions)
-
-    def _get_action_instance(self, action):
+    def _get_action_instance(self, action_entry):
 
         try:
-            action_name = action.getName() + 'Action'
+            action_name = action_entry.getName() + 'Action'
             action_module = globals()[action_name]
+
         except KeyError, e:
             action_name = 'DefaultAction'
             action_module = globals()[action_name]
 
-        a = action_module.get_instance(action)
-        return a
+        action = None
 
-    def on_btnExecClicked(self, button, dialog):
-        selected_actions = dialog.get_selected_actions()
-        self.execute(selected_actions)
+        try:
+            action = action_module.get_instance(action_entry)
 
-    def on_treeviewActionsRowActivated(self, treeview, path, column, dialog):
-        selected_actions = dialog.get_selected_actions()
-        self.execute(selected_actions)
+        except Exception, e:
+            raise e
+
+        return action

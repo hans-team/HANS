@@ -1,8 +1,0 @@
-[Action Entry]
-Type=1
-Name=Notify
-Comment=Notify a message
-Icon=/usr/share/icons/gnome/16x16/apps/xfwm4.png
-Exec=/usr/bin/notify-send
-MimeType=
-Interactive=false

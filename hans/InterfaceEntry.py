@@ -34,6 +34,8 @@ class InterfaceEntry(IniFile):
 
     def get_actions(self):
 
+        selected_actions = self.getAction().split(';')
+
         action_path = os.path.join(os.path.dirname(os.path.abspath(os.curdir)), 'db/actions')
         files = os.listdir(action_path)
         action_list = {}
@@ -45,7 +47,8 @@ class InterfaceEntry(IniFile):
                 groups = m.groups()
                 file_path = os.path.join(action_path, file)
                 action_entry = ActionEntry.ActionEntry(file_path)
-                action_list[action_entry.getName()] = action_entry
+                if groups[0] in selected_actions:
+                    action_list[action_entry.getName()] = action_entry
 
         return action_list
 

@@ -50,7 +50,6 @@ class ActionEntry(IniFile):
             interactive = True
         else:
             interactive = False
-        print interactive, type(interactive)
         return interactive
     def setInteractive(self, interactive):
         if interactive.lower() == 'true' or (type(interactive) == int and interactive != 0):

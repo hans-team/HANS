@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-requires actionselector_simple 1.0 -->
+  <!-- interface-naming-policy project-wide -->
+  <object class="ActionSelectorSimple" id="actionselector_simple">
+    <property name="width_request">640</property>
+    <property name="height_request">480</property>
+    <property name="no_show_all">True</property>
+    <property name="title" translatable="yes">Plauncher</property>
+    <property name="window_position">center-always</property>
+    <property name="icon">../media/icon.png</property>
+    <signal name="destroy" handler="on_destroy"/>
+    <signal name="delete-event" handler="on_destroy"/>
+    <child>
+      <object class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkLabel" id="lblTitle">
+            <property name="visible">True</property>
+            <property name="xpad">5</property>
+            <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;b&gt;HANS: Actions from device &lt;/b&gt;&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="padding">5</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox1">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkVBox" id="vbox3">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                    <property name="height_request">78</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="border_width">5</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkIconView" id="iconviewInterfaces">
+                        <property name="height_request">78</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="can_default">True</property>
+                        <property name="has_default">True</property>
+                        <property name="border_width">5</property>
+                        <property name="model">interfaceStore</property>
+                        <property name="reorderable">True</property>
+                        <signal name="selection_changed" handler="on_iconviewInterfaces_changed"/>
+                        <child>
+                          <object class="GtkCellRendererPixbuf" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="pixbuf">0</attribute>
+                          </attributes>
+                        </child>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                          <attributes>
+                            <attribute name="width">3</attribute>
+                            <attribute name="alignment">2</attribute>
+                            <attribute name="markup">1</attribute>
+                            <attribute name="wrap-mode">4</attribute>
+                            <attribute name="wrap-width">3</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrolledwindow2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="border_width">5</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkIconView" id="iconviewActions">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="can_default">True</property>
+                        <property name="has_default">True</property>
+                        <property name="border_width">5</property>
+                        <property name="selection_mode">multiple</property>
+                        <property name="model">actionStore</property>
+                        <property name="reorderable">True</property>
+                        <signal name="selection_changed" handler="on_iconviewActions_changed"/>
+                        <child>
+                          <object class="GtkCellRendererPixbuf" id="cellrenderertext3"/>
+                          <attributes>
+                            <attribute name="pixbuf">0</attribute>
+                          </attributes>
+                        </child>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext4"/>
+                          <attributes>
+                            <attribute name="width">3</attribute>
+                            <attribute name="alignment">2</attribute>
+                            <attribute name="markup">1</attribute>
+                            <attribute name="wrap-mode">4</attribute>
+                            <attribute name="wrap-width">3</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="actionStore">
+    <columns>
+      <!-- column-name Icon -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name Name -->
+      <column type="gchararray"/>
+      <!-- column-name Alignment -->
+      <column type="PangoAlignment"/>
+      <!-- column-name Size -->
+      <column type="guint"/>
+      <!-- column-name WrapMode -->
+      <column type="PangoWrapMode"/>
+      <!-- column-name ActionEntry -->
+      <column type="PyObject"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="interfaceStore">
+    <columns>
+      <!-- column-name Icon -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name Name -->
+      <column type="gchararray"/>
+      <!-- column-name Alignment -->
+      <column type="PangoAlignment"/>
+      <!-- column-name Size -->
+      <column type="guint"/>
+      <!-- column-name WrapMode -->
+      <column type="PangoWrapMode"/>
+      <!-- column-name InterfaceEntry -->
+      <column type="PyObject"/>
+    </columns>
+  </object>
+</interface>

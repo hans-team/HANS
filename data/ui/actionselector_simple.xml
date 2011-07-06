@@ -1,0 +1,9 @@
+<glade-catalog name="actionselector_simple" domain="glade-3" 
+               depends="gtk+" version="1.0">
+  <glade-widget-classes>
+    <glade-widget-class title="ActionSelectorSimple" name="ActionSelectorSimple" 
+                        generic-name="ActionSelectorSimple" parent="GtkWindow"
+                        icon-name="widget-gtk-window"/>
+  </glade-widget-classes>
+
+</glade-catalog>

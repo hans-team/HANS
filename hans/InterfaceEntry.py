@@ -45,10 +45,11 @@ class InterfaceEntry(IniFile):
             m = regexp.match(file)
             if m != None:
                 groups = m.groups()
+                action_name = groups[0]
                 file_path = os.path.join(action_path, file)
                 action_entry = ActionEntry.ActionEntry(file_path)
-                if groups[0] in selected_actions:
-                    action_list[action_entry.getName()] = action_entry
+                if action_name in selected_actions:
+                    action_list[action_name] = action_entry
 
         return action_list
 

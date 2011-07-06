@@ -47,6 +47,8 @@ class ActionSelectorDialog(gtk.Window):
         self.builder = builder
         self.device = device
         self._selected_interface = None
+        self._action_name_map = None
+
         self.builder.connect_signals(self)
         if type(execute_callback) == types.FunctionType:
             self.btnExecute.connect('clicked', execute_callback, self)
@@ -86,7 +88,8 @@ class ActionSelectorDialog(gtk.Window):
         for path in paths:
             iter = model.get_iter(path)
             value = model.get_value(iter, 0)
-            action_list.append(value.getName())
+            action_name = self._action_name_map[value.getName()]
+            action_list.append(action_name)
 
         return action_list
 
@@ -136,14 +139,15 @@ class ActionSelectorDialog(gtk.Window):
         treestore = self.treeviewActions.get_model()
         treestore.clear()
 
+        self._action_name_map = {}
         action_list = iface.get_actions()
+
         for name in action_list:
             action = action_list[name]
-            if action.getInteractive():
-                treestore.append(None, [action])
+            self._action_name_map[action.getName()] = name
+            treestore.append(None, [action])
 
         self.treeviewActions.set_model(treestore)
-        #self.treeviewActions.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
 
     def _render_column_pixbuf(self, column, cell, model, iter):
         action = model.get_value(iter, 0)

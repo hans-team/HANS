@@ -28,8 +28,9 @@ import string
 import pynotify
 import os
 import re
-
+import gtk
 import gettext
+import pwd
 import gudev
 from gettext import gettext as _
 gettext.textdomain('hans')
@@ -44,7 +45,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 
-from hans import (DeviceEntry, NewDeviceEntry, InterfaceEntry)
+from hans import (DeviceClass, InterfaceClass, ActionSelectorSimple, DefaultsEntry)
 from hans.utils import notify
 
 HANS_PATH_DB=PROJECT_ROOT_DIRECTORY+'/db/'
@@ -61,8 +62,8 @@ class HansCore():
 
     def main(self,argvs):
         try:
-            options, remainder = getopt.gnu_getopt(argvs, 't:p:d:c:', ['type=', 
-                                                             'path=','devicetype=','deviceclass',
+            options, remainder = getopt.gnu_getopt(argvs, 'p:', [
+                                                             'path=',
                                                              ])
         except getopt.GetoptError:
             usage()
@@ -72,105 +73,73 @@ class HansCore():
             usage()
             sys.exit(2)
         
-        if not pynotify.init("HANS notification"):
-            sys.exit(1)
 
-        opttype=False
         optpath=False
-        optdevt=False
-        optdevc=False
 
         for opt, arg in options:
-            if opt in ('-t', '--type'):
-                opttype=True
-                self.utype = arg
-            elif opt in ('-p', '--path'):
+            if opt in ('-p', '--path'):
                 optpath=True
                 self.path_dev = arg
-            elif opt in ('-d', '--devicetype'):
-                optdevt=True
-                self.dev_type = arg
-            elif opt in ('-c', '--deviceclass'):
-                optdevc=True
-                self.dev_class = arg
 
 
-        if not optpath and not opttype:
-            print "[-t|--type] and [-p|--path] options is required"
+        if not optpath :
+            print "[-p|--path] option is required"
             usage()
             sys.exit(2)
         
-        if 
 
-
-        if utype!='device' and utype!='interface':
-            print "[-t|--type] argument must be 'device' or 'interface'"
-            sys.exit(1)
-
-        if utype='device':
-            if not optpath:
-                print "[-p|--path] option is required for deviceclass"
-                usage()
-                sys.exit(2)
-
-            self.deviceClass=DeviceClass(self.path_dev)
+        self.device_class=DeviceClass.DeviceClass(self.path_dev)
+        notify("HANS - New device connected", self.device_class.get_formated_name(), utils.get_icon(self.device_class))        
+        
             
 
         
-
-
-
-
-
-
-    
-    
-
-
-        
-        regexp = re.compile('x-usb-device/[a-z]+')
-        if not regexp.match(self.dev_type):
-            print "The device type must be x-usb-device/'name_of_device'"
-            sys.exit(1)
-
-        self.device = self.dev_type.split("/")[1]
-#        if not self._checkDTavailable():
-#            self._notify(self.device, _("The device '"+self.device+"' isn't controlled by HANS"))
-#            print "Way to create new device_type and new udev rules (coding)"
-#            sys.exit(0) #temporally, waiting for code
-        
-        self.filename_entry=HANS_PATH_DB+self.device+".device"
-        if os.path.exists(self.filename_entry):
-            self.dev_type_entry=DeviceEntry.DeviceEntry(self.filename_entry)
-        else:
-            self._notify(self.device, _("The device '"+self.device+"' hasn't associated entry file"))
-            print "Way to create new entry for "+self.device+" by user (coding)"
-            sys.exit(0) #temporally, waiting for code
-        self._notify(self.dev_type_entry.getName(), self.dev_type_entry.getNotify())
-   
-#    def _checkDTavailable(self):
-#        infile = open(HANS_DT_AVAILABLE, 'r')
-#        hans_dt_available = list()
-#        for line in infile:
-#            hans_dt_available.append(line.strip('\n'))
-#        infile.close()
-#        if self.dev_type in hans_dt_available:
-#            return True
+#        regexp = re.compile('x-usb-device/[a-z]+')
+#        if not regexp.match(self.dev_type):
+#            print "The device type must be x-usb-device/'name_of_device'"
+#            sys.exit(1)
+#
+#        self.device = self.dev_type.split("/")[1]
+##        if not self._checkDTavailable():
+##            self._notify(self.device, _("The device '"+self.device+"' isn't controlled by HANS"))
+##            print "Way to create new device_type and new udev rules (coding)"
+##            sys.exit(0) #temporally, waiting for code
+#        
+#        self.filename_entry=HANS_PATH_DB+self.device+".device"
+#        if os.path.exists(self.filename_entry):
+#            self.dev_type_entry=DeviceEntry.DeviceEntry(self.filename_entry)
 #        else:
-#            return False
-
-
-    def _newDevice(self):
-        new = NewDeviceEntry.NewDeviceEntry()
-        response = new.run()
-        new.destroy()
-        sys.exit(0)
-            
+#            self._notify(self.device, _("The device '"+self.device+"' hasn't associated entry file"))
+#            print "Way to create new entry for "+self.device+" by user (coding)"
+#            sys.exit(0) #temporally, waiting for code
+#        self._notify(self.dev_type_entry.getName(), self.dev_type_entry.getNotify())
+#   
+##    def _checkDTavailable(self):
+##        infile = open(HANS_DT_AVAILABLE, 'r')
+##        hans_dt_available = list()
+##        for line in infile:
+##            hans_dt_available.append(line.strip('\n'))
+##        infile.close()
+##        if self.dev_type in hans_dt_available:
+##            return True
+##        else:
+##            return False
+#
+#
+##    def _newDevice(self):
+##        new = NewDeviceEntry.NewDeviceEntry()
+##        response = new.run()
+##        new.destroy()
+##        sys.exit(0)
+#            
 
 
 def usage():
-    print "Usage: hans-core.py [-t|--type] [-p|--path] [-d|--devicetype] [-c|--deviceclass]" 
+    print "Usage: hans-core.py [-p|--path]" 
 
 if __name__ == '__main__':
+    #new = ActionSelectorSimple.ActionSelectorSimple()
+    #new.show()
+    #gtk.main()
     hans=HansCore()
     hans.main(sys.argv[1:])

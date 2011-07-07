@@ -1,12 +1,59 @@
-# USB Base Class FEh (Application Specific) device HANS udev-rules file
+# Icon Assignment HANS udev-rules file
 #
-# This base class is defined for devices that conform to several class
-# specifications found on the USB-IF website.  That specification defines the
-# usable set of SubClass and Protocol values.  Values outside of that defined
-# spec are reserved.  These class codes can only be used in Interface
-# Descriptors.
+# This rules define defaults icons for devices
+# This rules are based on udev-notiy https://code.launchpad.net/~skss/udev-notify/udev-notify
 #
-# Spec used to create the rule: http://www.usb.org/developers/defined_class
+
+
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_TYPE}=="cd", ENV{DEVTYPE}=="disk", ENV{ICON}="media-optical", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="usb", ENV{ID_MEDIA_PLAYER}=="*", ENV{DEVTYPE}=="usb_device", ENV{ICON}="multimedia-player", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_BUS}=="usb", ENV{DEVTYPE}=="disk", ENV{ID_TYPE}=="disk", \
+ENV{ID_DRIVE_FLASH_MS}=="1", ENV{ICON}="gnome-dev-media-ms", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_TYPE}=="disk", ENV{DEVTYPE}=="disk", ENV{ID_BUS}=="usb", \
+ENV{ID_DRIVE_FLASH_SM}=="1", ENV{ICON}="gnome-dev-media-sm", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_TYPE}=="disk", ENV{DEVTYPE}=="disk", ENV{ID_BUS}=="usb", \ 
+ENV{ID_DRIVE_FLASH_CF}=="1", ENV{ICON}="gnome-dev-media-cf", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="mmc", ENV{ICON}="gnome-dev-media-mmc", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="memstick", ENV{ICON}="gnome-dev-media-ms", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_TYPE}=="disk", ENV{DEVTYPE}=="disk", ENV{ID_BUS}=="usb", \
+ENV{ID_DRIVE_FLASH_SD}=="1", ENV{ICON}="gnome-dev-media-sdmmc", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_TYPE}=="disk", ENV{DEVTYPE}=="disk", ENV{ID_BUS}=="usb", \
+ENV{ID_DRIVE_FLASH_SM}=="1", ENV{ICON}="drive-removable-media", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="net", ENV{DEVTYPE}=="wlan", ENV{ICON}="network-wireless", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="video4linux", ENV{ICON}="camera-web", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="input", ENV{ID_TYPE}=="hid", ENV{ID_INPUT_MOUSE}=="1", ENV{ICON}="mouse", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="input", ENV{ID_TYPE}=="hid", ENV{ID_INPUT_JOYSTICK}=="1", ENV{ICON}="joystick", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="sound", ENV{ID_TYPE}=="sound", ENV{ICON}="sound", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="tty", ENV{ID_BUS}=="usb", ENV{ICON}="modem", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="tty", ENV{ID_USB_DRIVER}=="cdc_acm", ENV{ICON}="modem", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="tty", ENV{ID_USB_DRIVER}=="ipaq", ENV{ICON}="pda", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="input", ENV{ID_TYPE}=="hid", ENV{ID_INPUT_KEYBOARD}=="1", ENV{ICON}="gnome-dev-keyboard", GOTO="icon_assignment"
+
+ACTION=="add", ENV{DEVTYPE}=="usb_device", ENV{ID_GPHOTO2}=="1", ENV{ICON}="camera-photo", GOTO="icon_assignment"
+
+ACTION=="add", SUBSYSTEM=="net", ENV{ID_BUS}=="usb", ENV{ICON}="network-wired", GOTO="icon_assignment"
+
+
+LABEL="icon_assignment"
+
+
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTR{bInterfaceClass}=="fe", \
@@ -51,6 +98,7 @@ ACTION=="add", SUBSYSTEM=="usb", \
 	
 
 LABEL="usbclass_feh_end"
+
 
 # USB Base Class 01h (Audio) device HANS udev-rules file
 #
@@ -421,12 +469,6 @@ LABEL="usbclass_dch_end"
 #
 # Spec used to create the rule: http://www.usb.org/developers/defined_class
 
-KERNEL=="mouse*|mice*", \
-	ACTION=="add", \
-        ENV{INTERFACETYPE}="x-usb-device/mouse-hid", \
-        ENV{HANS_TAG}!="1", \
-        ENV{HANS_TAG}="1"
-        
 
 ACTION=="add", SUBSYSTEM=="usb", \
 	ATTR{bInterfaceClass}=="03", \
@@ -859,11 +901,9 @@ LABEL="usbclass_ffh_end"
 
 
 
-ACTION=="add", SUBSYSTEMS=="usb", \
-	ATTR{bDeviceClass}, \
-	ATTR{bDeviceSubClass}, \
-	ATTR{bDeviceProtocol}, \
+ACTION=="add", SUBSYSTEMS=="usb", ENV{DEVTYPE}=="usb_device", \
     ENV{HANS_TAG}!="1", \
     ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans device $devpath"
+	RUN+="/usr/bin/hans /sys/$devpath"
+
 

@@ -1,7 +1,7 @@
 [Interface Entry]
 Name=Mobile
 Notify=Has conectado un telefono movil
-Icon-Notify= 
+Icon=/usr/share/icons/gnome/16x16/apps/xfce-edit.pngx
 Action=open
 Recommend-Pkg= 
 

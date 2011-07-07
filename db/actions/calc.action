@@ -2,7 +2,7 @@
 Type=1
 Name=Calculator
 Comment=Opens the calculator
-Icon=/usr/share/icons/gnome/16x16/apps/xfwm4.png
+Icon=/usr/share/icons/gnome/16x16/apps/xfwm4.pngx
 Exec=/usr/bin/gcalctool
 MimeType=
 Interactive=true

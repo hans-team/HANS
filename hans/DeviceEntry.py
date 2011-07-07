@@ -6,8 +6,12 @@ import os
 class DeviceEntry:
 
     def __init__(self, device_name):
+        self.device_name = device_name
         self.de_path = '/home/ahernandez/dev/HANS/db/%s.default' % (device_name,)
         self.de = None
+
+    def getName(self):
+        return self.device_name
 
     def get_interfaces(self):
         list = []

@@ -1,2 +1,2 @@
 
-__all__ = ['DefaultAction', 'NotifyAction']
+__all__ = ['DefaultAction']

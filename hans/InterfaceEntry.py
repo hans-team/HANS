@@ -62,10 +62,13 @@ class InterfaceEntry(IniFile):
         return self.get('Notify')
     def setNotify(self, notify):
         self.set('Notify', notify)
-    def getIcon_Notify(self):
-        return self.get('Icon-Notify')
-    def setIcon_Notify(self, icon_notify):
-        self.set('Icon-Notify', icon_notify)
+    def getIcon(self):
+        print '....................'
+        print type(self.get('Icon'))
+        print '....................'
+        return self.get('Icon')
+    def setIcon(self, icon):
+        self.set('Icon', icon)
     def getAction(self):
         return self.get('Action')
     def setAction(self, action):

@@ -44,11 +44,11 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 
-from hans import (DeviceEntry, NewDeviceEntry)
+from hans import (InterfaceEntry, NewDeviceEntry)
 
 #HANS_AVAILABLE_DT='@PREFIX@/share/hans/hans-dt-available.conf'
 #HANS_PATH_DB='@PREFIX@/share/hans/db/'
-HANS_PATH_DB=PROJECT_ROOT_DIRECTORY+'/db/'
+HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db/'
 TEXTBUFFER_LOGGER = 'hans-core'
 LOG_LEVEL = logging.DEBUG
 LOG_FORMAT = '%(asctime)s %(levelname)s - %(message)s'
@@ -57,9 +57,9 @@ LOG_DATE_FORMAT = '%H:%M:%S'
 
 class HansCore():
 
-    def main(self,argvs):
+    def main(self, argvs):
         try:
-            options, remainder = getopt.gnu_getopt(argvs, 't:p:n', ['type=', 
+            options, remainder = getopt.gnu_getopt(argvs, 't:p:n', ['type=',
                                                              'path=', 'new',
                                                              ])
         except getopt.GetoptError:
@@ -69,30 +69,30 @@ class HansCore():
         if not options:
             usage()
             sys.exit(2)
-        
+
         if not pynotify.init("HANS notification"):
             sys.exit(1)
 
-        opttype=False
-        optnew=False
+        opttype = False
+        optnew = False
 
         for opt, arg in options:
             if opt in ('-t', '--type'):
-                opttype=True
+                opttype = True
                 self.dev_type = arg
             elif opt in ('-p', '--path'):
                 self.path_dev = arg
             elif opt in ('-n', '--new'):
-                optnew=True
+                optnew = True
                 self._newDevice()
 
 
-        
+
         if not optnew and not opttype:
             print "[-t|--type] options is required"
             usage()
             sys.exit(2)
-        
+
         regexp = re.compile('[a-z]+-[a-z]+')
         if not regexp.match(self.dev_type):
             print "The device type must be device-'name_of_device'"
@@ -103,16 +103,16 @@ class HansCore():
 #            self._notify(self.device, _("The device '"+self.device+"' isn't controlled by HANS"))
 #            print "Way to create new device_type and new udev rules (coding)"
 #            sys.exit(0) #temporally, waiting for code
-        
-        self.filename_entry=HANS_PATH_DB+self.device+".device"
+
+        self.filename_entry = HANS_PATH_DB + self.device + ".device"
         if os.path.exists(self.filename_entry):
-            self.dev_type_entry=DeviceEntry.DeviceEntry(self.filename_entry)
+            self.dev_type_entry = InterfaceEntry.InterfaceEntry(self.filename_entry)
         else:
-            self._notify(self.device, _("The device '"+self.device+"' hasn't associated entry file"))
-            print "Way to create new entry for "+self.device+" by user (coding)"
+            self._notify(self.device, _("The device '" + self.device + "' hasn't associated entry file"))
+            print "Way to create new entry for " + self.device + " by user (coding)"
             sys.exit(0) #temporally, waiting for code
         self._notify(self.dev_type_entry.getName(), self.dev_type_entry.getNotify())
-   
+
 #    def _checkDTavailable(self):
 #        infile = open(HANS_DT_AVAILABLE, 'r')
 #        hans_dt_available = list()
@@ -124,11 +124,11 @@ class HansCore():
 #        else:
 #            return False
 
-    def _notify(self, device,  message):
-        notify = pynotify.Notification("HANS notification - "+device, message)
+    def _notify(self, device, message):
+        notify = pynotify.Notification("HANS notification - " + device, message)
         notify.set_urgency(pynotify.URGENCY_CRITICAL)
         notify.set_category("device")
-        
+
         if not notify.show():
             print "Failed to send notification"
 
@@ -137,12 +137,11 @@ class HansCore():
         response = new.run()
         new.destroy()
         sys.exit(0)
-            
 
 
 def usage():
-    print "Usage: hans-core.py [-t|--type] [-p|--path]" 
+    print "Usage: hans-core.py [-t|--type] [-p|--path]"
 
 if __name__ == '__main__':
-    hans=HansCore()
+    hans = HansCore()
     hans.main(sys.argv[1:])

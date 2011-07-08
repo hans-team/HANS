@@ -32,10 +32,10 @@ def get_defaults_path():
     return os.path.join(os.path.expanduser('~'), "hans/defaults")
 
 def get_actions_path():
-    return os.path.join(get_data_path, "db/actions")
+    return os.path.join(get_data_path(), "db/actions")
 
 def get_interfaces_path():
-    return os.path.join(get_data_path, "db")
+    return os.path.join(get_data_path(), "db")
 
 def get_pixbuf_from_file(self, file_name, icon_size, flags=gtk.gdk.INTERP_BILINEAR):
     if not os.path.exists(file_name):

@@ -6,7 +6,7 @@ import gettext
 from gettext import gettext as _
 
 from hans.helpers import get_builder
-from hans import InterfaceEntry
+from hans.model import InterfaceEntry
 
 gettext.textdomain('plauncher')
 

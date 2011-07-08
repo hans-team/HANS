@@ -113,4 +113,4 @@ class InterfaceEntry(IniFile):
     def new(self, filename):
         self.content = dict()
         self.addGroup(self.default_group)
-        self.filename = os.path.join(utils.get_interfaces_path(), filename)
+        self.filename = os.path.join(utils.get_interfaces_path(), filename , '.interface')

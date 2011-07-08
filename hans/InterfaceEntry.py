@@ -14,13 +14,13 @@ Recommend-Pkg = This key provides a list of packages that are recommended instal
 from xdg.IniFile import *
 import os
 import re
-import utils
+
 import ActionEntry
 
 class InterfaceEntry(IniFile):
     "Class to parse and validate DesktopEntries"
 
-    default_group = 'Interface Entry'
+    defaultGroup = 'Interface Entry'
 
     def __init__(self, filename=None, udev_object=None):
         self.content = dict()
@@ -28,56 +28,55 @@ class InterfaceEntry(IniFile):
         self.parse(os.path.join(utils.get_interfaces_path(),filename))
 
     def __str__(self):
-        return self.get_name()
-
-    def __cmp__(self, other):
-        cmp2 = None
-        if type(other) != types.NoneType:
-            cmp2 = other.content
-        return cmp(self.content, cmp2)
+        return self.getName()
 
     def parse(self, file):
         IniFile.parse(self, file, ["Interface Entry"])
 
     def get_actions(self):
 
-        selected_actions = self.get_action().split(';')
-        action_path = utils.get_actions_path()
-       # action_path = os.path.join(os.path.dirname(os.path.abspath(os.curdir)), 'db/actions')
+        selected_actions = self.getAction().split(';')
+
+        action_path = os.path.join(os.path.dirname(os.path.abspath(os.curdir)), 'db/actions')
         files = os.listdir(action_path)
         action_list = {}
 
-        for filename in files:
+        for file in files:
             regexp = re.compile('^(.+)\.(action)$')
-            m = regexp.match(filename)
+            m = regexp.match(file)
             if m != None:
                 groups = m.groups()
                 action_name = groups[0]
-                #file_path = os.path.join(action_path, filename)
-                action_entry = ActionEntry.ActionEntry(filename)
+                file_path = os.path.join(action_path, file)
+                action_entry = ActionEntry.ActionEntry(file_path)
                 if action_name in selected_actions:
                     action_list[action_name] = action_entry
 
         return action_list
 
     # start standard keys
-    def get_name(self):
+    def getName(self):
         return self.get('Name')
-    def set_name(self, name):
+    def setName(self, name):
         self.set('Name', name)
-    def get_notify(self):
+    def getNotify(self):
         return self.get('Notify')
-    def get_icon(self):
+    def setNotify(self, notify):
+        self.set('Notify', notify)
+    def getIcon(self):
+        print '....................'
+        print type(self.get('Icon'))
+        print '....................'
         return self.get('Icon')
-    def set_icon(self, icon):
-        self.set('Icon-Notify', icon)
-    def get_action(self):
+    def setIcon(self, icon):
+        self.set('Icon', icon)
+    def getAction(self):
         return self.get('Action')
-    def set_action(self, action):
+    def setAction(self, action):
         self.set('Action', action)
-    def get_recommend_pkgs(self):
+    def getRecommend_Pkgs(self):
         return self.get('Recommend-Pkgs', locale=True)
-    def set_recommend_pkgs(self, rpkgs):
+    def setRecommend_Pkgs(self, rpkgs):
         self.set('Recommend-Pkgs', rpkgs)
 
     def get_interface_class(self):
@@ -85,5 +84,5 @@ class InterfaceEntry(IniFile):
 
     def new(self, filename):
         self.content = dict()
-        self.addGroup(self.default_group)
-        self.filename = os.path.join(utils.get_interfaces_path(),filename)
+        self.addGroup(self.defaultGroup)
+        self.filename = filename

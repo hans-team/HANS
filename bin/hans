@@ -48,7 +48,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
 from hans import (DeviceClass, InterfaceClass, ActionSelectorSimple, DefaultsEntry)
 from hans.utils import notify
 
-HANS_PATH_DB=PROJECT_ROOT_DIRECTORY+'/db/'
+HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db/'
 TEXTBUFFER_LOGGER = 'hans-core'
 LOG_LEVEL = logging.DEBUG
 LOG_FORMAT = '%(asctime)s %(levelname)s - %(message)s'
@@ -58,9 +58,9 @@ LOG_DATE_FORMAT = '%H:%M:%S'
 class HansCore():
 
     def __init__(self):
-        self.gudev_client=gudev.Client('usb')
+        self.gudev_client = gudev.Client('usb')
 
-    def main(self,argvs):
+    def main(self, argvs):
         try:
             options, remainder = getopt.gnu_getopt(argvs, 'p:', [
                                                              'path=',
@@ -72,13 +72,12 @@ class HansCore():
         if not options:
             usage()
             sys.exit(2)
-        
 
-        optpath=False
+        optpath = False
 
         for opt, arg in options:
             if opt in ('-p', '--path'):
-                optpath=True
+                optpath = True
                 self.path_dev = arg
 
 
@@ -86,14 +85,13 @@ class HansCore():
             print "[-p|--path] option is required"
             usage()
             sys.exit(2)
-        
 
-        self.device_class=DeviceClass.DeviceClass(self.path_dev)
-        notify("HANS - New device connected", self.device_class.get_formated_name(), utils.get_icon(self.device_class))        
-        
-            
 
-        
+        self.device_class = DeviceClass.DeviceClass(self.path_dev)
+        notify("HANS - New device connected", self.device_class.get_formated_name(), utils.get_icon(self.device_class))
+
+
+
 #        regexp = re.compile('x-usb-device/[a-z]+')
 #        if not regexp.match(self.dev_type):
 #            print "The device type must be x-usb-device/'name_of_device'"
@@ -135,11 +133,11 @@ class HansCore():
 
 
 def usage():
-    print "Usage: hans-core.py [-p|--path]" 
+    print "Usage: hans-core.py [-p|--path]"
 
 if __name__ == '__main__':
     #new = ActionSelectorSimple.ActionSelectorSimple()
     #new.show()
     #gtk.main()
-    hans=HansCore()
+    hans = HansCore()
     hans.main(sys.argv[1:])

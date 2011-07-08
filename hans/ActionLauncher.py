@@ -3,7 +3,6 @@
 import os
 
 import ActionSelectorDialog
-from . import (DeviceEntry, InterfaceEntry)
 from actions import *
 
 class ActionLauncher:

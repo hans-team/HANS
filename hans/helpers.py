@@ -42,6 +42,6 @@ def get_media_file(media_file_name):
     if not os.path.exists(media_filename):
         media_filename = None
 
-    return "file:///"+media_filename
+    return "file:///" + media_filename
 
 

@@ -1,15 +1,15 @@
 
 from xdg.IniFile import *
-import os
+import os.path
 import types
-import utils
+
 class ActionEntry(IniFile):
 
-    default_group = 'Action Entry'
+    defaultGroup = 'Action Entry'
 
     def __init__(self, filename=None):
         self.content = dict()
-        self.parse(os.path.join(utils.get_actions_path(),filename))
+        self.parse(filename)
 
     def __str__(self):
         return self.getName()
@@ -24,27 +24,46 @@ class ActionEntry(IniFile):
         IniFile.parse(self, file, [self.defaultGroup])
 
     # start standard keys
-    def get_name(self):
+    def getName(self):
         return self.get('Name')
-    def set_name(self, name):
+    def setName(self, name):
         self.set('Name', name)
 
-    def get_comment(self):
+    def getComment(self):
         return self.get('Comment')
-    def set_comment(self, comment):
+    def setComment(self, comment):
         self.set('Comment', comment)
 
-    def get_icon(self):
+    def getIcon(self):
         return self.get('Icon')
-    def set_icon(self, icon):
+    def setIcon(self, icon):
         self.set('Icon', icon)
 
-    def get_exec(self):
+    def getExec(self):
         return self.get('Exec')
-    def set_exec(self, s_exec):
+    def setExec(self, s_exec):
         self.set('Exec', s_exec)
+
+    def getInteractive(self):
+        interactive = self.get('Interactive')
+        if interactive.lower() == 'true' or (type(interactive) == int and interactive != 0):
+            interactive = True
+        else:
+            interactive = False
+        return interactive
+    def setInteractive(self, interactive):
+        if interactive.lower() == 'true' or (type(interactive) == int and interactive != 0):
+            interactive = 'true'
+        else:
+            interactive = 'false'
+        self.set('Interactive', interactive)
+
+    def getMimetype(self):
+        return self.get('MimeType')
+    def setMimetype(self, mimetype):
+        self.set('MimeType', mimetype)
 
     def new(self, filename):
         self.content = dict()
-        self.addGroup(self.default_group)
-        self.filename = os.path.join(utils.get_actions_path(),filename)
+        self.addGroup(self.defaultGroup)
+        self.filename = filename

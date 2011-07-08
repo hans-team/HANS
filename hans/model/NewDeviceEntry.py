@@ -6,7 +6,7 @@
 import gtk
 
 from hans.helpers import get_builder
-from hans import (DeviceEntry, FilechooserDialog)
+from hans import (InterfaceEntry, FilechooserDialog)
 
 import gettext
 from gettext import gettext as _

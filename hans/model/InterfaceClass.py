@@ -49,7 +49,7 @@ class InterfaceClass():
     def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
         l_udev=self.client.query_by_subsystem('*')
         for udev_object in l_udev:
-            if self.sysfspath in udev_object.get_sysfs_path():
+            if self.sysfspath + '/' in udev_object.get_sysfs_path():
                 if udev_object.get_property('ICON'):
                     filename = udev_object.get_property('ICON')
                     if not os.path.exists(filename):

@@ -1,7 +1,0 @@
-[Interface Entry]
-Name=Ebook
-Notify=Has conectado un ebook
-Icon=/usr/share/icons/gnome/16x16/apps/xfce-edit.pngx
-Action=calc;open
-Recommend-Pkg= 
-

@@ -26,9 +26,10 @@ class InterfaceEntry(IniFile):
 
     default_group = 'Interface Entry'
 
-    def __init__(self, filename=None):
+    def __init__(self, filename=None, udev_object=None):
         self.content = dict()
-        self.parse(os.path.join(utils.get_interfaces_path(), filename))
+        self.udev_object = udev_object
+        self.parse(os.path.join(utils.get_interfaces_path(), filename + '.interface'))
 
     def __str__(self):
         return self.get_name()
@@ -41,6 +42,9 @@ class InterfaceEntry(IniFile):
 
     def parse(self, file):
         IniFile.parse(self, file, ["Interface Entry"])
+
+    def get_interface_class(self):
+        return self.udev_object
 
     def get_actions(self):
 
@@ -80,7 +84,7 @@ class InterfaceEntry(IniFile):
             filename = utils.get_theme_icon_path(filename, icon_size, flags)
 
         if filename == None:
-            iclass = entry.get_interface_class()
+            iclass = self.get_interface_class()
             filename = iclass.get_icon(icon_size, flags)
             if type(filename) == str and not os.path.exists(filename):
                 filename = utils.get_theme_icon_path(filename, icon_size, flags)
@@ -111,4 +115,4 @@ class InterfaceEntry(IniFile):
     def new(self, filename):
         self.content = dict()
         self.addGroup(self.default_group)
-        self.filename = os.path.join(utils.get_interfaces_path(), filename)
+        self.filename = os.path.join(utils.get_interfaces_path(), filename + '.interface')

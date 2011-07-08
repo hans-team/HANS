@@ -4,7 +4,6 @@ import gudev
 import re
 import InterfaceEntry
 import re
-import utils
 
 class InterfaceClass():
 

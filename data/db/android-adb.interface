@@ -1,5 +1,5 @@
 [Interface Entry]
-Name=Dispositivo
+Name=Interfaz de depuración ADB
 Notify=Has conectado un dispositivo
 Icon= 
 Action=calc;open

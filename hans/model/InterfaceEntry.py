@@ -98,9 +98,9 @@ class InterfaceEntry(IniFile):
     def set_icon(self, icon):
         self.set('Icon', icon)
 
-    def get_pixbuf(self, icon_size=DEFAULT_ICON_SIZE, flags=0):
+    def get_pixbuf(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
         filename = self.get_icon(icon_size, flags)
-        pixbuf = self.get_pixbuf_from_file(filename, ICONVIEW_ICON_SIZE)
+        pixbuf = utils.get_pixbuf_from_file(filename, icon_size)
         return pixbuf
 
     def get_action(self):

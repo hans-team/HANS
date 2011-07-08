@@ -11,11 +11,12 @@
     <property name="window_position">center-always</property>
     <property name="icon">../media/icon.png</property>
     <signal name="destroy" handler="on_destroy"/>
+    <signal name="delete-event" handler="on_destroy"/>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
         <child>
-          <object class="GtkLabel" id="lbltitle">
+          <object class="GtkLabel" id="lblTitle">
             <property name="visible">True</property>
             <property name="xpad">5</property>
             <property name="label" translatable="yes">&lt;big&gt;&lt;big&gt;&lt;big&gt;&lt;b&gt;HANS: Actions from device &lt;/b&gt;&lt;/big&gt;&lt;/big&gt;&lt;/big&gt;</property>
@@ -35,7 +36,7 @@
                 <property name="visible">True</property>
                 <child>
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
-                    <property name="height_request">78</property>
+                    <property name="height_request">140</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="border_width">5</property>
@@ -43,8 +44,8 @@
                     <property name="vscrollbar_policy">automatic</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkIconView" id="iconview2">
-                        <property name="height_request">78</property>
+                      <object class="GtkIconView" id="iconviewInterfaces">
+                        <property name="height_request">140</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="can_default">True</property>
@@ -52,7 +53,7 @@
                         <property name="border_width">5</property>
                         <property name="model">interfaceStore</property>
                         <property name="reorderable">True</property>
-                        <signal name="selection_changed" handler="on_iconview2_selection_changed"/>
+                        <signal name="selection_changed" handler="on_iconviewInterfaces_changed"/>
                         <child>
                           <object class="GtkCellRendererPixbuf" id="cellrenderertext1"/>
                           <attributes>
@@ -87,7 +88,7 @@
                     <property name="vscrollbar_policy">automatic</property>
                     <property name="shadow_type">in</property>
                     <child>
-                      <object class="GtkIconView" id="iconview1">
+                      <object class="GtkIconView" id="iconviewActions">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="can_default">True</property>
@@ -96,7 +97,7 @@
                         <property name="selection_mode">multiple</property>
                         <property name="model">actionStore</property>
                         <property name="reorderable">True</property>
-                        <signal name="selection_changed" handler="on_iconview_changed"/>
+                        <signal name="selection_changed" handler="on_iconviewActions_changed"/>
                         <child>
                           <object class="GtkCellRendererPixbuf" id="cellrenderertext3"/>
                           <attributes>
@@ -145,6 +146,8 @@
       <column type="guint"/>
       <!-- column-name WrapMode -->
       <column type="PangoWrapMode"/>
+      <!-- column-name ActionEntry -->
+      <column type="PyObject"/>
     </columns>
   </object>
   <object class="GtkListStore" id="interfaceStore">
@@ -159,6 +162,8 @@
       <column type="guint"/>
       <!-- column-name WrapMode -->
       <column type="PangoWrapMode"/>
+      <!-- column-name InterfaceEntry -->
+      <column type="PyObject"/>
     </columns>
   </object>
 </interface>

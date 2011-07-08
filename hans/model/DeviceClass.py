@@ -39,11 +39,11 @@ class DeviceClass():
         return model
 
     def get_interfaces(self):
-        if not self.list_interfaces == None:
+        if self.list_interfaces == None:
             self.list_interfaces = list()
             l_usb_udev = self.client.query_by_subsystem('usb')
             for usb_udev in l_usb_udev:
-                if self.sysfspath in usb_udev.get_sysfs_path():
+                if self.sysfspath + "/" in usb_udev.get_sysfs_path():
                    interface_udev=InterfaceClass.InterfaceClass(usb_udev.get_path())
                    self.list_interfaces.append(interface_udev)
 

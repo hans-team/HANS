@@ -9,6 +9,20 @@ import sys
 from gettext import gettext as _
 gettext.textdomain('hans')
 
+DEFAULT_ICON_INTERFACE = 'media/default-icon-interface.svg'
+DEFAULT_ICON_DEVICE = 'media/default-icon-device.svg'
+DEFAULT_ICON_ACTION = 'media/default-icon-action.svg'
+DEFAULT_ICON_SIZE = 48
+
+def get_default_icon_interface():
+    return os.path.join(get_data_path(), DEFAULT_ICON_INTERFACE)
+
+def get_default_icon_device():
+    return os.path.join(get_data_path(), DEFAULT_ICON_DEVICE)
+
+def get_default_icon_action():
+    return os.path.join(get_data_path(),DEFAULT_ICON_ACTION)
+
 
 def notify(title, message, icon, timeout=None):
     if not pynotify.init("HANS Notifications"):
@@ -32,10 +46,10 @@ def get_defaults_path():
     return os.path.join(os.path.expanduser('~'), "hans/defaults")
 
 def get_actions_path():
-    return os.path.join(get_data_path, "db/actions")
+    return os.path.join(get_data_path(), "db/actions")
 
 def get_interfaces_path():
-    return os.path.join(get_data_path, "db")
+    return os.path.join(get_data_path(), "db")
 
 def get_pixbuf_from_file(self, file_name, icon_size, flags=gtk.gdk.INTERP_BILINEAR):
     if not os.path.exists(file_name):

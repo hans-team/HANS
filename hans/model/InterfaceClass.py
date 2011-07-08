@@ -1,7 +1,9 @@
 import os.path
+from hans import utils
 import gudev
 import InterfaceEntry
 import re
+import utils
 
 class InterfaceClass():
 
@@ -44,7 +46,7 @@ class InterfaceClass():
     def get_interface_entry(self):
         return self.int_entry
     
-    def get_icon(self):
+    def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
         l_udev=self.client.query_by_subsystem('*')
         for udev_object in l_udev:
             if self.sysfspath in udev_object.get_sysfs_path():

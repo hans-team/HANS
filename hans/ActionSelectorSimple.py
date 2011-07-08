@@ -165,7 +165,7 @@ class ActionSelectorSimple(gtk.Window):
 
         ifaces = self.device.get_interfaces()
         for iface in ifaces:
-            #iface = iface.getInterfaceEntry()
+            iface = iface.get_interface_entry()
             store.append([
                 iface.get_pixbuf(ICONVIEW_ICON_SIZE), self._get_text(iface),
                 pango.ALIGN_CENTER, ICONVIEW_COLUMN_WIDTH, pango.WRAP_WORD,

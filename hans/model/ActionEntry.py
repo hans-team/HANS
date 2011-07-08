@@ -2,14 +2,19 @@
 from xdg.IniFile import *
 import os
 import types
-import utils
+from hans import utils
+from hans.hansconfig import get_data_path
+
+DEFAULT_ICON_ACTION = 'media/applications-system.png'
+DEFAULT_ICON_SIZE = 48
+
 class ActionEntry(IniFile):
 
     default_group = 'Action Entry'
 
     def __init__(self, filename=None):
         self.content = dict()
-        self.parse(os.path.join(utils.get_actions_path(),filename))
+        self.parse(os.path.join(utils.get_actions_path(), filename))
 
     def __str__(self):
         return self.getName()
@@ -34,10 +39,25 @@ class ActionEntry(IniFile):
     def set_comment(self, comment):
         self.set('Comment', comment)
 
-    def get_icon(self):
-        return self.get('Icon')
+    def get_icon(self, icon_size=DEFAULT_ICON_SIZE, flags=0):
+
+        filename = self.get('Icon')
+
+        if not os.path.exists(filename):
+            filename = utils.get_theme_icon_path(filename, icon_size, flags)
+
+        if filename == None:
+            filename = os.path.join(get_data_path(), DEFAULT_ICON_ACTION)
+
+        return filename
+
     def set_icon(self, icon):
         self.set('Icon', icon)
+
+    def get_pixbuf(self, icon_size=DEFAULT_ICON_SIZE, flags=0):
+        filename = self.get_icon(icon_size, flags)
+        pixbuf = self.get_pixbuf_from_file(filename, ICONVIEW_ICON_SIZE)
+        return pixbuf
 
     def get_exec(self):
         return self.get('Exec')
@@ -47,4 +67,4 @@ class ActionEntry(IniFile):
     def new(self, filename):
         self.content = dict()
         self.addGroup(self.default_group)
-        self.filename = os.path.join(utils.get_actions_path(),filename)
+        self.filename = os.path.join(utils.get_actions_path(), filename)

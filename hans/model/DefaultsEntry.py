@@ -2,7 +2,7 @@
 from xdg.IniFile import *
 import os
 import types
-import utils
+from hans import utils
 
 class DefaultsEntry(IniFile):
 
@@ -11,7 +11,7 @@ class DefaultsEntry(IniFile):
     def __init__(self, filename=None):
         print 'init'
         self.content = dict()
-        self.parse(os.path.join(utils.getDefaultsPath(),filename))
+        self.parse(os.path.join(utils.getDefaultsPath(), filename))
 
     def __str__(self):
         return self.getName()
@@ -43,4 +43,4 @@ class DefaultsEntry(IniFile):
         print 'new'
         self.content = dict()
         self.addGroup(self.defaultGroup)
-        self.filename = os.path.join(utils.getDefaultsPath(),filename)
+        self.filename = os.path.join(utils.getDefaultsPath(), filename)

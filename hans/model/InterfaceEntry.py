@@ -14,8 +14,12 @@ Recommend-Pkg = This key provides a list of packages that are recommended instal
 from xdg.IniFile import *
 import os
 import re
-import utils
+from hans import utils
+from hans.hansconfig import get_data_path
 import ActionEntry
+
+DEFAULT_ICON_INTERFACE = 'media/gnome-dev-removable-usb.png'
+DEFAULT_ICON_SIZE = 48
 
 class InterfaceEntry(IniFile):
     "Class to parse and validate DesktopEntries"
@@ -24,7 +28,7 @@ class InterfaceEntry(IniFile):
 
     def __init__(self, filename=None):
         self.content = dict()
-        self.parse(os.path.join(utils.get_interfaces_path(),filename))
+        self.parse(os.path.join(utils.get_interfaces_path(), filename))
 
     def __str__(self):
         return self.get_name()
@@ -64,16 +68,41 @@ class InterfaceEntry(IniFile):
         return self.get('Name')
     def set_name(self, name):
         self.set('Name', name)
+
     def get_notify(self):
         return self.get('Notify')
-    def get_icon(self):
-        return self.get('Icon')
+
+    def get_icon(self, icon_size=DEFAULT_ICON_SIZE, flags=0):
+
+        filename = self.get('Icon')
+
+        if not os.path.exists(filename):
+            filename = utils.get_theme_icon_path(filename, icon_size, flags)
+
+        if filename == None:
+            iclass = entry.get_interface_class()
+            filename = iclass.get_icon(icon_size, flags)
+            if type(filename) == str and not os.path.exists(filename):
+                filename = utils.get_theme_icon_path(filename, icon_size, flags)
+
+        if filename == None:
+            filename = os.path.join(get_data_path(), DEFAULT_ICON_INTERFACE)
+
+        return filename
+
     def set_icon(self, icon):
-        self.set('Icon-Notify', icon)
+        self.set('Icon', icon)
+
+    def get_pixbuf(self, icon_size=DEFAULT_ICON_SIZE, flags=0):
+        filename = self.get_icon(icon_size, flags)
+        pixbuf = self.get_pixbuf_from_file(filename, ICONVIEW_ICON_SIZE)
+        return pixbuf
+
     def get_action(self):
         return self.get('Action')
     def set_action(self, action):
         self.set('Action', action)
+
     def get_recommend_pkgs(self):
         return self.get('Recommend-Pkgs', locale=True)
     def set_recommend_pkgs(self, rpkgs):
@@ -82,4 +111,4 @@ class InterfaceEntry(IniFile):
     def new(self, filename):
         self.content = dict()
         self.addGroup(self.default_group)
-        self.filename = os.path.join(utils.get_interfaces_path(),filename)
+        self.filename = os.path.join(utils.get_interfaces_path(), filename)

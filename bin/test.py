@@ -62,11 +62,16 @@ def launch_actions(interface_entry, action_list):
 
 if __name__ == "__main__":
 
-    device = DeviceClass.DeviceClass('/foo/bar')
+    try:
+        syspath = '/sys/devices/pci0000:00/0000:00:1d.7/usb1/1-5'
+        device = DeviceClass.DeviceClass(syspath)
 
-    #dialog = ActionSelectorDialog.ActionSelectorDialog(device, execute_callback)
-    #dialog.main()
+        #dialog = ActionSelectorDialog.ActionSelectorDialog(device, execute_callback)
+        #dialog.main()
 
-    dialog = ActionSelectorSimple.ActionSelectorSimple(device, execute_callback)
-    dialog.main()
+        dialog = ActionSelectorSimple.ActionSelectorSimple(device, execute_callback)
+        dialog.main()
+
+    except Exception, e:
+        print e
 

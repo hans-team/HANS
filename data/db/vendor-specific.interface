@@ -1,0 +1,7 @@
+[Interface Entry]
+Name=Dispositivo
+Notify=Has conectado un dispositivo
+Icon= 
+Action=calc;open
+Recommend-Pkg= 
+

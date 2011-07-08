@@ -45,18 +45,17 @@ class DeviceClass():
             self.list_interfaces = list()
             l_usb_udev = self.client.query_by_subsystem('usb')
             for usb_udev in l_usb_udev:
-                if self.sysfspath + '/' in usb_udev.get_sysfs_path():
-                    interface_udev = InterfaceClass.InterfaceClass(usb_udev.get_sysfs_path())
-                    print interface_udev
-                    self.list_interfaces.append(interface_udev)
+                if self.sysfspath + "/" in usb_udev.get_sysfs_path():
+                   interface_udev = InterfaceClass.InterfaceClass(usb_udev.get_path())
+                   self.list_interfaces.append(interface_udev)
 
             return self.list_interfaces
         else:
             return self.list_interfaces
 
-    def get_icon(self):
+    def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flag=0):
         if self.get_number_interfaces() == 1:
-            return self.get_interfaces()[0].get_icon()
+            return self.get_interfaces()[0].get_interface_entry().get_icon(icon_size, flag)
         else:
             return os.path.join(get_data_path(), "media/default-icon-device.svg")
 

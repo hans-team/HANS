@@ -18,8 +18,6 @@ from hans import utils
 from hans.hansconfig import get_data_path
 import ActionEntry
 
-DEFAULT_ICON_INTERFACE = 'media/gnome-dev-removable-usb.png'
-DEFAULT_ICON_SIZE = 48
 
 class InterfaceEntry(IniFile):
     "Class to parse and validate DesktopEntries"
@@ -76,7 +74,10 @@ class InterfaceEntry(IniFile):
     def get_notify(self):
         return self.get('Notify')
 
-    def get_icon(self, icon_size=DEFAULT_ICON_SIZE, flags=0):
+    def get_interface_class(self):
+        return self.udev_object
+
+    def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
 
         filename = self.get('Icon')
 
@@ -90,7 +91,7 @@ class InterfaceEntry(IniFile):
                 filename = utils.get_theme_icon_path(filename, icon_size, flags)
 
         if filename == None:
-            filename = os.path.join(get_data_path(), DEFAULT_ICON_INTERFACE)
+            filename = utils.get_default_icon_interface()
 
         return filename
 

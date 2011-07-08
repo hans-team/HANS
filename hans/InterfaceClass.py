@@ -1,6 +1,7 @@
 import os.path
 import gudev
 import InterfaceEntry
+import re
 
 class InterfaceClass():
 
@@ -9,7 +10,7 @@ class InterfaceClass():
         self.sysfspath=sysfspath
         self.client=gudev.Client('usb')
         self.int_udev=self.client.query_by_sysfs_path(sysfspath)
-        self.int_entry=InterfaceEntry.InterfaceEntry(self.get_interface_name())
+        self.int_entry=InterfaceEntry.InterfaceEntry(self.get_interface_name(),self)
 
     def __str__(self):
         return self.get_formated_name()
@@ -42,3 +43,17 @@ class InterfaceClass():
 
     def get_interface_entry(self):
         return self.int_entry
+    
+    def get_icon(self):
+        l_udev=self.client.query_by_subsystem('*')
+        for udev_object in l_udev:
+            if self.sysfspath in udev_object.get_sysfs_path():
+                if udev_object.get_property('ICON'):
+                    filename = udev_object.get_property('ICON')
+                    if not os.path.exists(filename):
+                        filename = utils.get_theme_icon_path(filename, icon_size, flags)
+                        return filename
+                    return filename
+                            
+        return None
+

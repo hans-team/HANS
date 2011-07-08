@@ -22,8 +22,9 @@ class InterfaceEntry(IniFile):
 
     default_group = 'Interface Entry'
 
-    def __init__(self, filename=None):
+    def __init__(self, filename=None, udev_object=None):
         self.content = dict()
+        self.udev_object=udev_object
         self.parse(os.path.join(utils.get_interfaces_path(),filename))
 
     def __str__(self):
@@ -78,6 +79,9 @@ class InterfaceEntry(IniFile):
         return self.get('Recommend-Pkgs', locale=True)
     def set_recommend_pkgs(self, rpkgs):
         self.set('Recommend-Pkgs', rpkgs)
+
+    def get_interface_class(self):
+        return self.udev_object
 
     def new(self, filename):
         self.content = dict()

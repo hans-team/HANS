@@ -61,12 +61,36 @@ def launch_actions(interface_entry, action_list):
     launcher.execute(action_list)
 
 if __name__ == "__main__":
+    
+    try:
+        options, remainder = getopt.gnu_getopt(sys.argv[1:], 'p:', [
+                                                             'path=',
+                                                             ])
+    except getopt.GetoptError:
+        sys.exit(2)
 
-    device = DeviceClass.DeviceClass('/foo/bar')
+    if not options:
+        sys.exit(2)
 
-    #dialog = ActionSelectorDialog.ActionSelectorDialog(device, execute_callback)
-    #dialog.main()
+    optpath = False
 
-    dialog = ActionSelectorSimple.ActionSelectorSimple(device, execute_callback)
-    dialog.main()
+    for opt, arg in options:
+        if opt in ('-p', '--path'):
+            optpath = True
+            self.path_dev = arg
 
+
+    if not optpath :
+        print "[-p|--path] option is required"
+
+    #try:
+        device = DeviceClass.DeviceClass(self.path_dev)
+
+        #dialog = ActionSelectorDialog.ActionSelectorDialog(device, execute_callback)
+        #dialog.main()
+
+        dialog = ActionSelectorSimple.ActionSelectorSimple(device, execute_callback)
+        dialog.main()
+
+    #except Exception, e:
+    #    print e

@@ -10,16 +10,13 @@ import types
 import gobject
 
 from hans.helpers import get_builder
-from hans import (InterfaceEntry, ActionEntry)
+from hans.model import (InterfaceEntry, ActionEntry)
 
 import gettext
 from gettext import gettext as _
 
 gettext.textdomain('hans')
 
-
-DEFAULT_ICON_INTERFACE = 'gnome-dev-removable-usb'
-DEFAULT_ICON_ACTION = 'applications-system'
 ICONVIEW_ICON_SIZE = 68
 ICONVIEW_COLUMN_WIDTH = 140
 
@@ -56,7 +53,7 @@ class ActionSelectorSimple(gtk.Window):
         self.iconviewActions = builder.get_object('iconviewActions')
         self.lblTitle = builder.get_object('lblTitle')
 
-        title = 'HANS: %s %s' % (_('Actions for device'), device.getName())
+        title = 'HANS: %s %s' % (_('Actions for device'), device.get_formated_name())
         title = '<big><big><b>%s</b></big></big>' % (title,)
         self.lblTitle.set_markup(title)
 
@@ -88,7 +85,7 @@ class ActionSelectorSimple(gtk.Window):
         action = self._get_selected_iconview_item(self.iconviewActions)
         if action == None:
             return ()
-        name = self._action_name_map[action.getName()]
+        name = self._action_name_map[action.get_name()]
         action_list = (name,)
         return action_list
 
@@ -134,68 +131,23 @@ class ActionSelectorSimple(gtk.Window):
 
         return item
 
-    def get_icon(self, entry):
-
-        filename = None
-
-        if isinstance(entry, InterfaceEntry.InterfaceEntry):
-            filename = self.get_interface_icon_file(entry, ICONVIEW_ICON_SIZE)
-
-        elif isinstance(entry, ActionEntry.ActionEntry):
-            filename = self.get_action_icon_file(entry, ICONVIEW_ICON_SIZE)
-
-        pixbuf = self.get_pixbuf_from_file(filename, ICONVIEW_ICON_SIZE)
-        return pixbuf
-
-    def get_interface_icon_file(self, entry, icon_size, flags=0):
-
-        filename = entry.getIcon()
-
-        if not os.path.exists(filename):
-            filename = self.get_theme_icon_path(DEFAULT_ICON_INTERFACE, icon_size, flags)
-
-        if filename == None:
-            iclass = entry.get_interface_class()
-            filename = iclass.get_icon()
-            if not os.path.exists(filename):
-                filename = self.get_theme_icon_path(DEFAULT_ICON_INTERFACE, icon_size, flags)
-
-        if filename == None:
-            filename = os.path.join(get_data_path(), 'media/default-interface.png')
-
-        return filename
-
-    def get_action_icon_file(self, entry, icon_size, flags=0):
-
-        filename = entry.getIcon()
-
-        if not os.path.exists(filename):
-            filename = self.get_theme_icon_path(DEFAULT_ICON_ACTION, icon_size, flags)
-
-        if filename == None:
-            filename = os.path.join(get_data_path(), 'media/default-action.png')
-
-        return filename
-
-    def get_pixbuf_from_file(self, file_name, icon_size, flags=gtk.gdk.INTERP_BILINEAR):
-        if not os.path.exists(file_name):
-            raise Exception('Icon file not found: %s' % (file_name,))
-        image = gtk.Image()
-        image.set_from_file(file_name)
-        pixbuf = image.get_pixbuf()
-        pixbuf = pixbuf.scale_simple(icon_size, icon_size, flags)
-        return pixbuf
-
-    def get_theme_icon_path(self, icon_name, icon_size, flags=0):
-        icon_theme = gtk.icon_theme_get_default()
-        icons = icon_theme.list_icons()
-        if not icon_name in icons:
-            return None
-        file_name = icon_theme.lookup_icon(icon_name, icon_size, flags).get_filename()
-        return file_name
+#===============================================================================
+#    def get_icon(self, entry):
+# 
+#        filename = None
+# 
+#        if isinstance(entry, InterfaceEntry.InterfaceEntry):
+#            filename = self.get_interface_icon_file(entry, ICONVIEW_ICON_SIZE)
+# 
+#        elif isinstance(entry, ActionEntry.ActionEntry):
+#            filename = self.get_action_icon_file(entry, ICONVIEW_ICON_SIZE)
+# 
+#        pixbuf = self.get_pixbuf_from_file(filename, ICONVIEW_ICON_SIZE)
+#        return pixbuf
+#===============================================================================
 
     def _get_text(self, entry):
-        return '<b>' + _(entry.getName()) + '</b>'
+        return '<b>' + _(entry.get_name()) + '</b>'
 
     def _init_iconview(self, iconview):
 
@@ -215,7 +167,7 @@ class ActionSelectorSimple(gtk.Window):
         for iface in ifaces:
             #iface = iface.getInterfaceEntry()
             store.append([
-                self.get_icon(iface), self._get_text(iface),
+                iface.get_pixbuf(ICONVIEW_ICON_SIZE), self._get_text(iface),
                 pango.ALIGN_CENTER, ICONVIEW_COLUMN_WIDTH, pango.WRAP_WORD,
                 iface
             ])
@@ -232,9 +184,9 @@ class ActionSelectorSimple(gtk.Window):
         action_list = iface.get_actions()
         for name in action_list:
             action = action_list[name]
-            self._action_name_map[action.getName()] = name
+            self._action_name_map[action.get_name()] = name
             store.append([
-                self.get_icon(action), self._get_text(action),
+                action.get_pixbuf(ICONVIEW_ICON_SIZE), self._get_text(action),
                 pango.ALIGN_CENTER, ICONVIEW_COLUMN_WIDTH, pango.WRAP_WORD,
                 action
             ])

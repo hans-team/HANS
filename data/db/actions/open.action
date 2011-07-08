@@ -1,0 +1,8 @@
+[Action Entry]
+Type=1
+Name=Open
+Comment=Open with an application
+Icon=/usr/share/icons/gnome/16x16/apps/xfce-edit.png
+Exec=/usr/bin/nautilus
+MimeType=
+Interactive=true

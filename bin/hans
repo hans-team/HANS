@@ -24,13 +24,14 @@
 import sys
 import getopt
 import logging
-import ConfigParser
 import string
 import pynotify
 import os
 import re
-
+import gtk
 import gettext
+import pwd
+import gudev
 from gettext import gettext as _
 gettext.textdomain('hans')
 
@@ -44,10 +45,9 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 
-from hans import (InterfaceEntry, NewDeviceEntry)
+from hans import (DeviceClass, InterfaceClass, ActionSelectorSimple, DefaultsEntry)
+from hans.utils import notify
 
-#HANS_AVAILABLE_DT='@PREFIX@/share/hans/hans-dt-available.conf'
-#HANS_PATH_DB='@PREFIX@/share/hans/db/'
 HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db/'
 TEXTBUFFER_LOGGER = 'hans-core'
 LOG_LEVEL = logging.DEBUG
@@ -57,10 +57,13 @@ LOG_DATE_FORMAT = '%H:%M:%S'
 
 class HansCore():
 
+    def __init__(self):
+        self.gudev_client = gudev.Client('usb')
+
     def main(self, argvs):
         try:
-            options, remainder = getopt.gnu_getopt(argvs, 't:p:n', ['type=',
-                                                             'path=', 'new',
+            options, remainder = getopt.gnu_getopt(argvs, 'p:', [
+                                                             'path=',
                                                              ])
         except getopt.GetoptError:
             usage()
@@ -70,78 +73,71 @@ class HansCore():
             usage()
             sys.exit(2)
 
-        if not pynotify.init("HANS notification"):
-            sys.exit(1)
-
-        opttype = False
-        optnew = False
+        optpath = False
 
         for opt, arg in options:
-            if opt in ('-t', '--type'):
-                opttype = True
-                self.dev_type = arg
-            elif opt in ('-p', '--path'):
+            if opt in ('-p', '--path'):
+                optpath = True
                 self.path_dev = arg
-            elif opt in ('-n', '--new'):
-                optnew = True
-                self._newDevice()
 
 
-
-        if not optnew and not opttype:
-            print "[-t|--type] options is required"
+        if not optpath :
+            print "[-p|--path] option is required"
             usage()
             sys.exit(2)
 
-        regexp = re.compile('[a-z]+-[a-z]+')
-        if not regexp.match(self.dev_type):
-            print "The device type must be device-'name_of_device'"
-            sys.exit(1)
 
-        self.device = self.dev_type.split("-")[1]
-#        if not self._checkDTavailable():
-#            self._notify(self.device, _("The device '"+self.device+"' isn't controlled by HANS"))
-#            print "Way to create new device_type and new udev rules (coding)"
-#            sys.exit(0) #temporally, waiting for code
+        self.device_class = DeviceClass.DeviceClass(self.path_dev)
+        notify("HANS - New device connected", self.device_class.get_formated_name(), utils.get_icon(self.device_class))
 
-        self.filename_entry = HANS_PATH_DB + self.device + ".device"
-        if os.path.exists(self.filename_entry):
-            self.dev_type_entry = InterfaceEntry.InterfaceEntry(self.filename_entry)
-        else:
-            self._notify(self.device, _("The device '" + self.device + "' hasn't associated entry file"))
-            print "Way to create new entry for " + self.device + " by user (coding)"
-            sys.exit(0) #temporally, waiting for code
-        self._notify(self.dev_type_entry.getName(), self.dev_type_entry.getNotify())
 
-#    def _checkDTavailable(self):
-#        infile = open(HANS_DT_AVAILABLE, 'r')
-#        hans_dt_available = list()
-#        for line in infile:
-#            hans_dt_available.append(line.strip('\n'))
-#        infile.close()
-#        if self.dev_type in hans_dt_available:
-#            return True
+
+#        regexp = re.compile('x-usb-device/[a-z]+')
+#        if not regexp.match(self.dev_type):
+#            print "The device type must be x-usb-device/'name_of_device'"
+#            sys.exit(1)
+#
+#        self.device = self.dev_type.split("/")[1]
+##        if not self._checkDTavailable():
+##            self._notify(self.device, _("The device '"+self.device+"' isn't controlled by HANS"))
+##            print "Way to create new device_type and new udev rules (coding)"
+##            sys.exit(0) #temporally, waiting for code
+#        
+#        self.filename_entry=HANS_PATH_DB+self.device+".device"
+#        if os.path.exists(self.filename_entry):
+#            self.dev_type_entry=DeviceEntry.DeviceEntry(self.filename_entry)
 #        else:
-#            return False
-
-    def _notify(self, device, message):
-        notify = pynotify.Notification("HANS notification - " + device, message)
-        notify.set_urgency(pynotify.URGENCY_CRITICAL)
-        notify.set_category("device")
-
-        if not notify.show():
-            print "Failed to send notification"
-
-    def _newDevice(self):
-        new = NewDeviceEntry.NewDeviceEntry()
-        response = new.run()
-        new.destroy()
-        sys.exit(0)
+#            self._notify(self.device, _("The device '"+self.device+"' hasn't associated entry file"))
+#            print "Way to create new entry for "+self.device+" by user (coding)"
+#            sys.exit(0) #temporally, waiting for code
+#        self._notify(self.dev_type_entry.getName(), self.dev_type_entry.getNotify())
+#   
+##    def _checkDTavailable(self):
+##        infile = open(HANS_DT_AVAILABLE, 'r')
+##        hans_dt_available = list()
+##        for line in infile:
+##            hans_dt_available.append(line.strip('\n'))
+##        infile.close()
+##        if self.dev_type in hans_dt_available:
+##            return True
+##        else:
+##            return False
+#
+#
+##    def _newDevice(self):
+##        new = NewDeviceEntry.NewDeviceEntry()
+##        response = new.run()
+##        new.destroy()
+##        sys.exit(0)
+#            
 
 
 def usage():
-    print "Usage: hans-core.py [-t|--type] [-p|--path]"
+    print "Usage: hans-core.py [-p|--path]"
 
 if __name__ == '__main__':
+    #new = ActionSelectorSimple.ActionSelectorSimple()
+    #new.show()
+    #gtk.main()
     hans = HansCore()
     hans.main(sys.argv[1:])

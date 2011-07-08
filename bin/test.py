@@ -20,8 +20,11 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 from hans import (
-    ActionLauncher, DeviceEntry, InterfaceEntry, DefaultsEntry,
-    NewDeviceEntry, ActionSelectorSimple, ActionSelectorDialog, SimpleActionSelectorWindow, actions
+    ActionLauncher, ActionSelectorSimple, ActionSelectorDialog, SimpleActionSelectorWindow, actions
+)
+
+from hans.model import (
+    DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry
 )
 
 HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db'
@@ -59,7 +62,7 @@ def launch_actions(interface_entry, action_list):
 
 if __name__ == "__main__":
 
-    device = DeviceEntry.DeviceEntry('mydevice-001')
+    device = DeviceClass.DeviceClass('/foo/bar')
 
     #dialog = ActionSelectorDialog.ActionSelectorDialog(device, execute_callback)
     #dialog.main()

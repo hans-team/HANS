@@ -1,0 +1,7 @@
+[Interface Entry]
+Name=Mobile
+Notify=Has conectado un telefono movil
+Icon-Notify= 
+Action=open
+Recommend-Pkg= 
+

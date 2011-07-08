@@ -9,19 +9,20 @@ from hans.helpers import get_builder
 
 import gettext
 from gettext import gettext as _
+
 gettext.textdomain('hans')
 
-class ApplistDialog(gtk.Dialog):
-    __gtype_name__ = "ApplistDialog"
+class ActionSelectorWindow(gtk.Window):
+    __gtype_name__ = "ActionSelectorWindow"
 
     def __new__(cls):
         """Special static method that's automatically called by Python when 
         constructing a new instance of this class.
         
-        Returns a fully instantiated ApplistDialog object.
+        Returns a fully instantiated EditlauncherDialog object.
         """
-        builder = get_builder('ApplistDialog')
-        new_object = builder.get_object('applist_dialog')
+        builder = get_builder('ActionSelectorWindow')
+        new_object = builder.get_object('actionselector_window')
         new_object.finish_initializing(builder)
         return new_object
 
@@ -29,30 +30,28 @@ class ApplistDialog(gtk.Dialog):
         """Called when we're finished initializing.
 
         finish_initalizing should be called after parsing the ui definition
-        and creating a ApplistDialog object with it in order to
-        finish initializing the start of the new ApplistDialog
+        and creating a EditlauncherDialog object with it in order to
+        finish initializing the start of the new EditlauncherDialog
         instance.
         """
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.builder.connect_signals(self)
 
-    def ok(self, widget, data=None):
-        """The user has elected to save the changes.
-
-        Called before the dialog returns gtk.RESONSE_OK from run().
-        """
+    
+    def on_btexec_clicked(self, widget, data=None):
         pass
 
-    def cancel(self, widget, data=None):
-        """The user has elected cancel changes.
+    def on_btcancel_clicked(self, widget, data=None):
+        gtk.main_quit()
 
-        Called before the dialog returns gtk.RESPONSE_CANCEL for run()
-        """
-        pass
-
+    def on_destroy(self, widget, data=None):
+        """Called when the PlauncherWindow is closed."""
+        # Clean up code for saving application state should be added here.
+        gtk.main_quit()
+    
 
 if __name__ == "__main__":
-    dialog = ApplistDialog()
+    dialog = ActionSelectorWindow()
     dialog.show()
     gtk.main()

@@ -77,6 +77,7 @@ class ActionSelectorSimple(gtk.Window):
 
         self.udev_signals = UdevSignals.UdevSignals()
         self.udev_signals.connect('added', self.new_device)
+        self.udev_signals.connect('removed', self.remove_device)
         self.show()
 
     def get_selected_device(self):
@@ -198,7 +199,14 @@ class ActionSelectorSimple(gtk.Window):
         self.iconviewActions.set_model(store)
 
     def new_device(self, udev_signals, gudevice):
-        self._load_interfaces()       
+        if self.device.get_sysfs_path() in gudevice.get_sysfs_path():
+            self._load_interfaces()
+    
+    def remove_device(self, udev_signals, gudevice):
+        if self.device.get_sysfs_path() == gudevice.get_sysfs_path():
+            gtk.main_quit()
+            return
+        self._load_interfaces()
 
     
 gobject.type_register(ActionSelectorSimple)

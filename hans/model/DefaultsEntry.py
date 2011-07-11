@@ -10,7 +10,7 @@ class DefaultsEntry(IniFile):
 
     def __init__(self, filename=None):
         self.content = dict()
-        self.parse(os.path.join(utils.getDefaultsPath(), filename))
+        self.parse(os.path.join(utils.get_defaults_path(), filename))
 
     def __str__(self):
         return self.get_name()
@@ -28,17 +28,17 @@ class DefaultsEntry(IniFile):
         IniFile.write(self, self.filename)
 
     # start standard keys
-    def getInterface(self):
+    def get_interface(self):
         return self.get('Interface')
-    def setInterface(self, interface):
+    def set_interface(self, interface):
         self.set('Interface', interface)
 
-    def getActions(self):
+    def get_actions(self):
         return self.get('Actions')
-    def setActions(self, actions):
+    def set_actions(self, actions):
         self.set('Actions', actions)
 
     def new(self, filename):
         self.content = dict()
         self.addGroup(self.defaultGroup)
-        self.filename = os.path.join(utils.getDefaultsPath(), filename)
+        self.filename = os.path.join(utils.get_defaults_path(), filename)

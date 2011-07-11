@@ -53,24 +53,25 @@ class DeviceClass():
         else:
             return self.list_interfaces
 
-    def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flag=0):
+    def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
         if self.get_number_interfaces() == 1:
-            return self.get_interfaces()[0].get_interface_entry().get_icon(icon_size, flag)
+            return self.get_interfaces()[0].get_interface_entry().get_icon(icon_size, flags)
         else:
             return utils.get_default_icon_device()
 
     def get_pixbuf(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
-        return utils.get_pixbuf_from_file(self.get_icon(), icon_size, flag)
+        return utils.get_pixbuf_from_file(self.get_icon(), icon_size, flags)
 
     def get_number_interfaces(self):
-        if not self.list_interfaces == None:
+        if self.list_interfaces == None:
             self.list_interfaces = self.get_interfaces()
         return len(self.list_interfaces)
-
 
     def get_defaults_entry(self):
 
         filename_default = self.get_vendor() + "-" + self.get_model()
+        filename_default = filename_default.replace(' ', '_')
+        filename_default += '.defaults'
 
         if isinstance(self.de, DefaultsEntry.DefaultsEntry):
             return self.de

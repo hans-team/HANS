@@ -10,6 +10,7 @@ import os
 import re
 import time
 import gtk
+import gobject
 import gudev
 
 # Add project root directory (enable symlink, and trunk execution).
@@ -24,6 +25,8 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
 from hans import (ActionLauncher, ActionSelectorSimple, ActionSelectorDialog, actions)
 
 from hans.model import (DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry)
+
+from hans.utils import notify
 
 HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db'
 HANS_PATH_ACTIONS_DB = HANS_PATH_DB + '/actions'
@@ -89,11 +92,14 @@ if __name__ == "__main__":
     #try:
     device = DeviceClass.DeviceClass(path_dev)
 
+    notify("HANS - New "+device.get_type_device()+" connected ", device.get_formated_name(), device.get_pixbuf())
+
         #dialog = ActionSelectorDialog.ActionSelectorDialog(device, execute_callback)
         #dialog.main()
 
     dialog = ActionSelectorSimple.ActionSelectorSimple(device, execute_callback)
     dialog.main()
+    #gobject.MainLoop().run()
     
     #except Exception, e:
     #    print e

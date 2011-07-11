@@ -66,7 +66,7 @@ class ActionSelectorSimple(gtk.Window):
         self._action_name_map = None
 
         self.builder.connect_signals(self)
-        if type(execute_callback) == types.FunctionType:
+        if type(execute_callback) == types.FunctionType or type(execute_callback) == types.MethodType:
             self.connect('execute-action', execute_callback)
 
         self._init_iconview(self.iconviewInterfaces)

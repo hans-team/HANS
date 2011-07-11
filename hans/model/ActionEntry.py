@@ -14,7 +14,7 @@ class ActionEntry(IniFile):
         self.parse(os.path.join(utils.get_actions_path(), filename))
 
     def __str__(self):
-        return self.getName()
+        return self.get_name()
 
     def __cmp__(self, other):
         cmp2 = None

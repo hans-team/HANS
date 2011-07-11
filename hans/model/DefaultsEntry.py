@@ -9,12 +9,11 @@ class DefaultsEntry(IniFile):
     defaultGroup = 'Defaults Entry'
 
     def __init__(self, filename=None):
-        print 'init'
         self.content = dict()
         self.parse(os.path.join(utils.getDefaultsPath(), filename))
 
     def __str__(self):
-        return self.getName()
+        return self.get_name()
 
     def __cmp__(self, other):
         cmp2 = None
@@ -40,7 +39,6 @@ class DefaultsEntry(IniFile):
         self.set('Actions', actions)
 
     def new(self, filename):
-        print 'new'
         self.content = dict()
         self.addGroup(self.defaultGroup)
         self.filename = os.path.join(utils.getDefaultsPath(), filename)

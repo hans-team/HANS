@@ -20,7 +20,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 from hans import (
-    ActionLauncher, ActionSelectorSimple, ActionSelectorDialog, SimpleActionSelectorWindow, actions
+    ActionLauncher, ActionSelectorSimple, ActionSelectorDialog, actions
 )
 
 from hans.model import (
@@ -42,13 +42,15 @@ def execute_callback(button, dialog):
     set_as_default = dialog.get_set_as_default()
     #dialog.destroy()
 
+    print '--------------------'
     print selected_interface
     print selected_actions
     print set_as_default
+    print '--------------------'
 
     if set_as_default:
         de = dialog.device.get_defaults_entry()
-        de.setInterface(selected_interface.getName())
+        de.setInterface(selected_interface.get_name())
         de.setActions(';'.join(selected_actions))
         de.write()
 
@@ -63,6 +65,7 @@ def launch_actions(interface_entry, action_list):
 if __name__ == "__main__":
 
     #try:
+        syspath = '/sys/devices/pci0000:00/0000:00:1d.7/usb1/1-5'
         syspath = '/sys/devices/pci0000:00/0000:00:1d.7/usb1/1-5'
         device = DeviceClass.DeviceClass(syspath)
 

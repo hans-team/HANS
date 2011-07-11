@@ -8,6 +8,7 @@ import string
 import pynotify
 import os
 import re
+import time
 import gtk
 import threading
 
@@ -24,9 +25,7 @@ from hans import (
     ActionLauncher, ActionSelectorSimple, ActionSelectorDialog, actions
 )
 
-from hans.model import (
-    DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry
-)
+from hans.model import (DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry)
 
 HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db'
 HANS_PATH_ACTIONS_DB = HANS_PATH_DB + '/actions'

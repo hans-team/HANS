@@ -27,6 +27,8 @@ from hans import (
 
 from hans.model import (DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry)
 
+from hans.utils import notify
+
 HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db'
 HANS_PATH_ACTIONS_DB = HANS_PATH_DB + '/actions'
 TEXTBUFFER_LOGGER = 'hans-core'
@@ -43,4 +45,3 @@ if __name__ == "__main__":
 
     t = HansThread.HansThread(device)
     t.start()
-

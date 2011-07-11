@@ -1,9 +1,12 @@
 import os.path
 import gudev
+import gettext
 import InterfaceClass
 import DefaultsEntry
 from hans import utils
 from hans.hansconfig import get_data_path
+from gettext import gettext as _
+gettext.textdomain('hans')
 
 class DeviceClass():
 
@@ -19,6 +22,9 @@ class DeviceClass():
 
     def __str__(self):
         return self.getFormatedName()
+
+    def get_sysfs_path(self):
+        return self.sysfspath
 
     def get_udev_object(self):
         return self.dev_udev
@@ -53,14 +59,21 @@ class DeviceClass():
         else:
             return self.list_interfaces
 
-    def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
-        if self.get_number_interfaces() == 1:
-            return self.get_interfaces()[0].get_interface_entry().get_icon(icon_size, flags)
+    def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flag=0):
+        if self.dev_udev.get_property('ICON'):
+            filename = self.dev_udev.get_property('ICON')
+            if not os.path.exists(filename):
+                filename = utils.get_theme_icon_path(filename, icon_size, flag)
+                return filename
+            return filename
+        num_interfaces = self.get_number_interfaces()
+        if num_interfaces == 1:
+            return self.get_interfaces()[0].get_interface_entry().get_icon(icon_size, flag)
         else:
             return utils.get_default_icon_device()
 
-    def get_pixbuf(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
-        return utils.get_pixbuf_from_file(self.get_icon(), icon_size, flags)
+    def get_pixbuf(self, icon_size=utils.DEFAULT_ICON_SIZE, flag=0):
+        return utils.get_pixbuf_from_file(self.get_icon(), icon_size, flag)
 
     def get_number_interfaces(self):
         if self.list_interfaces == None:
@@ -88,3 +101,21 @@ class DeviceClass():
         fp.close()
         self.de = DefaultsEntry.DefaultsEntry(filename_default)
         return self.de
+
+    def get_type_device(self):
+        num_interfaces = self.get_number_interfaces()
+        if self.dev_udev.get_property('ICON'):
+            filename = self.dev_udev.get_property('ICON')
+            if filename == 'camera-photo':
+                return _("camera photo")
+            elif filename == 'multimedia-player':
+                return _("multimedia player")
+            else:
+                return filename
+        else:
+            if num_interfaces == 1:
+                return self.get_interfaces()[0].get_formated_name()
+            else:
+                return _("device")
+
+

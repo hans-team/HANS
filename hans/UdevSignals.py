@@ -40,7 +40,7 @@ class UdevSignals(gobject.GObject):
             (gobject.TYPE_PYOBJECT,)),
     }
 
-    def __init__(self, subsystems=['*'], parent_tree=False):
+    def __init__(self, subsystems=[], parent_tree=False):
         '''
         Create a new DeviceFinder and attach to the udev system to 
         listen for events.
@@ -68,10 +68,7 @@ class UdevSignals(gobject.GObject):
 
     def device_removed(self, gudevice, subsystem):
         '''Called when a device has been removed from the system'''
-        fin=open("/tmp/signals2","w")
-        fin.write(gudevice.get_sysfs_path())
-        fin.close()
- 
+        self.emit('removed', gudevice) 
 
     def device_changed(self, gudevice, subsystem):
         '''Called when a device has been updated'''

@@ -97,22 +97,20 @@ class ActionSelectorSimple(gtk.Window):
         # Clean up code for saving application state should be added here.
         gtk.main_quit()
 
-    def on_iconviewActions_changed(self, iconview):
+    def on_iconviewActions_buttonReleased(self, iconview, event):
         try:
-            action = self._get_selected_iconview_item(iconview)
+            item = self._get_selected_iconview_item_at_pos(iconview, event.x, event.y)
             self.emit('execute-action', self)
 
         except Exception, e:
-            print 'on_iconviewActions_changed', e
             pass
 
-    def on_iconviewInterfaces_changed(self, iconview):
+    def on_iconviewInterfaces_buttonReleased(self, iconview, event):
         try:
-            self.interface = self._get_selected_iconview_item(iconview)
+            self.interface = self._get_selected_iconview_item_at_pos(iconview, event.x, event.y)
             self._load_actions(self.interface)
 
         except Exception, e:
-            print 'on_iconviewInterfaces_changed', e
             pass
 
     def _get_selected_iconview_item(self, iconview):
@@ -127,24 +125,25 @@ class ActionSelectorSimple(gtk.Window):
 
         except Exception, e:
             print e
-            pass
 
         return item
 
-#===============================================================================
-#    def get_icon(self, entry):
-# 
-#        filename = None
-# 
-#        if isinstance(entry, InterfaceEntry.InterfaceEntry):
-#            filename = self.get_interface_icon_file(entry, ICONVIEW_ICON_SIZE)
-# 
-#        elif isinstance(entry, ActionEntry.ActionEntry):
-#            filename = self.get_action_icon_file(entry, ICONVIEW_ICON_SIZE)
-# 
-#        pixbuf = self.get_pixbuf_from_file(filename, ICONVIEW_ICON_SIZE)
-#        return pixbuf
-#===============================================================================
+    def _get_selected_iconview_item_at_pos(self, iconview, x, y):
+
+        item = None
+
+        try:
+            path = iconview.get_path_at_pos(int(x), int(y))
+            if path == None:
+                raise Exception('No item selected')
+            model = iconview.get_model()
+            item = model.get_value(model.get_iter(path), 5)
+
+        except Exception, e:
+            print e
+            raise e
+
+        return item
 
     def _get_text(self, entry):
         return '<b>' + _(entry.get_name()) + '</b>'

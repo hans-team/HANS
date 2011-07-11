@@ -47,15 +47,15 @@ class InterfaceClass():
         return self.int_entry
 
     def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
+        filename = None
         l_udev = self.client.query_by_subsystem('*')
         for udev_object in l_udev:
             if self.sysfspath + '/' in udev_object.get_sysfs_path():
-                if udev_object.get_property('ICON'):
-                    filename = udev_object.get_property('ICON')
+                filename = udev_object.get_property('ICON')
+                if filename:
                     if not os.path.exists(filename):
                         filename = utils.get_theme_icon_path(filename, icon_size, flags)
-                        return filename
                     return filename
 
-        return None
+        return filename
 

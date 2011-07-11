@@ -45,7 +45,7 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 
-from hans import (DeviceClass, InterfaceClass, ActionSelectorSimple, DefaultsEntry)
+from hans import (HansThread, DeviceClass, InterfaceClass, ActionSelectorSimple, DefaultsEntry)
 from hans.utils import notify
 
 HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db/'
@@ -88,8 +88,9 @@ class HansCore():
 
 
         self.device_class = DeviceClass.DeviceClass(self.path_dev)
-        notify("HANS - New device connected", self.device_class.get_formated_name(), utils.get_icon(self.device_class))
 
+        t = HansThread.HansThread(self.device_class)
+        t.start()
 
 
 #        regexp = re.compile('x-usb-device/[a-z]+')
@@ -136,8 +137,5 @@ def usage():
     print "Usage: hans-core.py [-p|--path]"
 
 if __name__ == '__main__':
-    #new = ActionSelectorSimple.ActionSelectorSimple()
-    #new.show()
-    #gtk.main()
     hans = HansCore()
     hans.main(sys.argv[1:])

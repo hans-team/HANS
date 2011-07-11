@@ -80,10 +80,11 @@ class DeviceClass():
             self.list_interfaces = self.get_interfaces()
         return len(self.list_interfaces)
 
-
     def get_defaults_entry(self):
 
         filename_default = self.get_vendor() + "-" + self.get_model()
+        filename_default = filename_default.replace(' ', '_')
+        filename_default += '.defaults'
 
         if isinstance(self.de, DefaultsEntry.DefaultsEntry):
             return self.de

@@ -53,7 +53,7 @@
                         <property name="border_width">5</property>
                         <property name="model">interfaceStore</property>
                         <property name="reorderable">True</property>
-                        <signal name="selection_changed" handler="on_iconviewInterfaces_changed"/>
+                        <signal name="button-release-event" handler="on_iconviewInterfaces_buttonReleased"/>
                         <child>
                           <object class="GtkCellRendererPixbuf" id="cellrenderertext1"/>
                           <attributes>
@@ -97,7 +97,7 @@
                         <property name="selection_mode">multiple</property>
                         <property name="model">actionStore</property>
                         <property name="reorderable">True</property>
-                        <signal name="selection_changed" handler="on_iconviewActions_changed"/>
+                        <signal name="button-release-event" handler="on_iconviewActions_buttonReleased"/>
                         <child>
                           <object class="GtkCellRendererPixbuf" id="cellrenderertext3"/>
                           <attributes>

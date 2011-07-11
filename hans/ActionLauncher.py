@@ -29,7 +29,7 @@ class ActionLauncher:
     def _get_action_instance(self, action_entry):
 
         try:
-            action_name = action_entry.getName() + 'Action'
+            action_name = action_entry.get_name() + 'Action'
             action_module = globals()[action_name]
 
         except KeyError, e:

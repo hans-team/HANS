@@ -14,7 +14,7 @@ class DefaultAction():
 
     def execute(self, udev_item):
         try:
-            cmd = self._action_entry.getExec()
+            cmd = self._action_entry.get_exec()
             args = shlex.split(cmd)
             p = subprocess.Popen(args)
 

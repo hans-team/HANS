@@ -8,7 +8,9 @@ import string
 import pynotify
 import os
 import re
+import time
 import gtk
+import gudev
 
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
@@ -19,13 +21,9 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
-from hans import (
-    ActionLauncher, ActionSelectorSimple, ActionSelectorDialog, SimpleActionSelectorWindow, actions
-)
+from hans import (ActionLauncher, ActionSelectorSimple, ActionSelectorDialog, actions)
 
-from hans.model import (
-    DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry
-)
+from hans.model import (DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry)
 
 HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db'
 HANS_PATH_ACTIONS_DB = HANS_PATH_DB + '/actions'
@@ -60,6 +58,7 @@ def launch_actions(interface_entry, action_list):
     launcher = ActionLauncher.ActionLauncher(interface_entry)
     launcher.execute(action_list)
 
+
 if __name__ == "__main__":
     
     try:
@@ -77,20 +76,24 @@ if __name__ == "__main__":
     for opt, arg in options:
         if opt in ('-p', '--path'):
             optpath = True
-            self.path_dev = arg
+            path_dev = arg
 
 
     if not optpath :
         print "[-p|--path] option is required"
 
+    fin=open("/tmp/pete2","w") 
+    fin.write(path_dev)
+    fin.close()
+
     #try:
-        device = DeviceClass.DeviceClass(self.path_dev)
+    device = DeviceClass.DeviceClass(path_dev)
 
         #dialog = ActionSelectorDialog.ActionSelectorDialog(device, execute_callback)
         #dialog.main()
 
-        dialog = ActionSelectorSimple.ActionSelectorSimple(device, execute_callback)
-        dialog.main()
-
+    dialog = ActionSelectorSimple.ActionSelectorSimple(device, execute_callback)
+    dialog.main()
+    
     #except Exception, e:
     #    print e

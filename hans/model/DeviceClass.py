@@ -12,6 +12,8 @@ class DeviceClass():
         self.sysfspath = sysfspath
         self.client = gudev.Client('usb')
         self.dev_udev = self.client.query_by_sysfs_path(sysfspath)
+        if self.dev_udev == None:
+            raise Exception('Device not found: ' + sysfspath)
         self.de = None
         self.list_interfaces = None
 
@@ -44,7 +46,7 @@ class DeviceClass():
             l_usb_udev = self.client.query_by_subsystem('usb')
             for usb_udev in l_usb_udev:
                 if self.sysfspath + "/" in usb_udev.get_sysfs_path():
-                   interface_udev=InterfaceClass.InterfaceClass(usb_udev.get_path())
+                   interface_udev = InterfaceClass.InterfaceClass(usb_udev.get_sysfs_path())
                    self.list_interfaces.append(interface_udev)
 
             return self.list_interfaces
@@ -55,9 +57,9 @@ class DeviceClass():
         if self.get_number_interfaces() == 1:
             return self.get_interfaces()[0].get_interface_entry().get_icon(icon_size, flag)
         else:
-            return os.path.join(get_data_path(), "media/default-icon-device.svg")
+            return utils.get_default_icon_device()
 
-    def get_pixbuf(self, icon_size, flag):
+    def get_pixbuf(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
         return utils.get_pixbuf_from_file(self.get_icon(), icon_size, flag)
 
     def get_number_interfaces(self):

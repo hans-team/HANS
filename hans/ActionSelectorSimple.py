@@ -8,11 +8,12 @@ import gtk
 import pango
 import types
 import gobject
-
+import gudev
 from hans.helpers import get_builder
 from hans.model import (InterfaceEntry, ActionEntry)
 
 import gettext
+import UdevSignals
 from gettext import gettext as _
 
 gettext.textdomain('hans')
@@ -22,6 +23,7 @@ ICONVIEW_COLUMN_WIDTH = 140
 
 class ActionSelectorSimple(gtk.Window):
     __gtype_name__ = "ActionSelectorSimple"
+
 
     def __init__(self, device=None, execute_callback=None):
         gtk.Window.__init__(self)
@@ -73,6 +75,8 @@ class ActionSelectorSimple(gtk.Window):
         self._init_iconview(self.iconviewActions)
         self._load_interfaces()
 
+        self.udev_signals = UdevSignals.UdevSignals()
+        self.udev_signals.connect('added', self.new_device)
         self.show()
 
     def get_selected_device(self):
@@ -165,7 +169,7 @@ class ActionSelectorSimple(gtk.Window):
 
         ifaces = self.device.get_interfaces()
         for iface in ifaces:
-            #iface = iface.getInterfaceEntry()
+            iface = iface.get_interface_entry()
             store.append([
                 iface.get_pixbuf(ICONVIEW_ICON_SIZE), self._get_text(iface),
                 pango.ALIGN_CENTER, ICONVIEW_COLUMN_WIDTH, pango.WRAP_WORD,
@@ -193,7 +197,10 @@ class ActionSelectorSimple(gtk.Window):
 
         self.iconviewActions.set_model(store)
 
+    def new_device(self, udev_signals, gudevice):
+        self._load_interfaces()       
 
+    
 gobject.type_register(ActionSelectorSimple)
 gobject.signal_new(
     'execute-action', ActionSelectorSimple,

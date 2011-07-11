@@ -21,7 +21,7 @@ def get_default_icon_device():
     return os.path.join(get_data_path(), DEFAULT_ICON_DEVICE)
 
 def get_default_icon_action():
-    return os.path.join(get_data_path(),DEFAULT_ICON_ACTION)
+    return os.path.join(get_data_path(), DEFAULT_ICON_ACTION)
 
 
 def notify(title, message, icon, timeout=None):
@@ -51,7 +51,7 @@ def get_actions_path():
 def get_interfaces_path():
     return os.path.join(get_data_path(), "db")
 
-def get_pixbuf_from_file(self, file_name, icon_size, flags=gtk.gdk.INTERP_BILINEAR):
+def get_pixbuf_from_file(file_name, icon_size=DEFAULT_ICON_SIZE, flags=gtk.gdk.INTERP_BILINEAR):
     if not os.path.exists(file_name):
         return None
     image = gtk.Image()
@@ -60,7 +60,7 @@ def get_pixbuf_from_file(self, file_name, icon_size, flags=gtk.gdk.INTERP_BILINE
     pixbuf = pixbuf.scale_simple(icon_size, icon_size, flags)
     return pixbuf
 
-def get_theme_icon_path(self, icon_name, icon_size, flags=0):
+def get_theme_icon_path(icon_name, icon_size=DEFAULT_ICON_SIZE, flags=0):
     icon_theme = gtk.icon_theme_get_default()
     icons = icon_theme.list_icons()
     if not icon_name in icons:

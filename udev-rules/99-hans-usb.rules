@@ -7,7 +7,7 @@
 
 ACTION=="add", SUBSYSTEM=="block", ENV{ID_TYPE}=="cd", ENV{DEVTYPE}=="disk", ENV{ICON}="media-optical", GOTO="icon_assignment"
 
-ACTION=="add", SUBSYSTEM=="usb", ENV{ID_MEDIA_PLAYER}=="*", ENV{DEVTYPE}=="usb_device", ENV{ICON}="multimedia-player", GOTO="icon_assignment"
+ACTION=="add", SUBSYSTEM=="usb", ENV{ID_MEDIA_PLAYER}=="[a-z]*", ENV{DEVTYPE}=="usb_device", ENV{ICON}="multimedia-player", GOTO="icon_assignment"
 
 ACTION=="add", SUBSYSTEM=="block", ENV{ID_BUS}=="usb", ENV{DEVTYPE}=="disk", ENV{ID_TYPE}=="disk", \
 ENV{ID_DRIVE_FLASH_MS}=="1", ENV{ICON}="gnome-dev-media-ms", GOTO="icon_assignment"
@@ -27,6 +27,9 @@ ENV{ID_DRIVE_FLASH_SD}=="1", ENV{ICON}="gnome-dev-media-sdmmc", GOTO="icon_assig
 
 ACTION=="add", SUBSYSTEM=="block", ENV{ID_TYPE}=="disk", ENV{DEVTYPE}=="disk", ENV{ID_BUS}=="usb", \
 ENV{ID_DRIVE_FLASH_SM}=="1", ENV{ICON}="drive-removable-media", GOTO="icon_assignment"
+
+ACTION=="add|change", SUBSYSTEM=="block", ENV{ID_TYPE}=="disk", ENV{DEVTYPE}=="disk", ENV{ID_BUS}=="usb", \
+ENV{ICON}="gnome-dev-media-sm", GOTO="icon_assignment"
 
 ACTION=="add", SUBSYSTEM=="net", ENV{DEVTYPE}=="wlan", ENV{ICON}="network-wireless", GOTO="icon_assignment"
 
@@ -904,6 +907,6 @@ LABEL="usbclass_ffh_end"
 ACTION=="add", SUBSYSTEMS=="usb", ENV{DEVTYPE}=="usb_device", \
     ENV{HANS_TAG}!="1", \
     ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans /sys/$devpath"
+	RUN+="/usr/bin/hans /sys$devpath"
 
 

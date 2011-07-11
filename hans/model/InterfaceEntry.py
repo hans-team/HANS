@@ -18,6 +18,7 @@ from hans import utils
 from hans.hansconfig import get_data_path
 import ActionEntry
 
+DEFAULT_INTERFACE_FILENAME = 'vendor-specific'
 
 class InterfaceEntry(IniFile):
     "Class to parse and validate DesktopEntries"
@@ -38,8 +39,13 @@ class InterfaceEntry(IniFile):
             cmp2 = other.content
         return cmp(self.content, cmp2)
 
-    def parse(self, file):
-        IniFile.parse(self, file, ["Interface Entry"])
+    def parse(self, filepath):
+        if not os.path.exists(filepath):
+            filepath = os.path.join(utils.get_interfaces_path(), DEFAULT_INTERFACE_FILENAME + '.interface')
+        try:
+            IniFile.parse(self, filepath, ["Interface Entry"])
+        except Exception, e:
+            print e
 
     def get_interface_class(self):
         return self.udev_object

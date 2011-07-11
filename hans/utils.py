@@ -43,7 +43,7 @@ def notify(title, message, icon, timeout=None):
         print "Failed to send notification"
 
 def get_defaults_path():
-    return os.path.join(os.path.expanduser('~'), "hans/defaults")
+    return os.path.join(os.path.expanduser('~'), ".config/hans/defaults")
 
 def get_actions_path():
     return os.path.join(get_data_path(), "db/actions")

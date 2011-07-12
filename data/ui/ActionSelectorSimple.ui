@@ -36,7 +36,7 @@
                 <property name="visible">True</property>
                 <child>
                   <object class="GtkScrolledWindow" id="scrolledwindow1">
-                    <property name="height_request">140</property>
+                    <property name="height_request">145</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="border_width">5</property>
@@ -45,7 +45,7 @@
                     <property name="shadow_type">in</property>
                     <child>
                       <object class="GtkIconView" id="iconviewInterfaces">
-                        <property name="height_request">140</property>
+                        <property name="height_request">145</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="can_default">True</property>
@@ -54,6 +54,7 @@
                         <property name="model">interfaceStore</property>
                         <property name="reorderable">True</property>
                         <signal name="button-release-event" handler="on_iconviewInterfaces_buttonReleased"/>
+                        <signal name="selection-changed" handler="on_iconviewInterfaces_changed"/>
                         <child>
                           <object class="GtkCellRendererPixbuf" id="cellrenderertext1"/>
                           <attributes>
@@ -98,6 +99,7 @@
                         <property name="model">actionStore</property>
                         <property name="reorderable">True</property>
                         <signal name="button-release-event" handler="on_iconviewActions_buttonReleased"/>
+                        <signal name="activate-cursor-item" handler="on_iconviewActions_activated"/>
                         <child>
                           <object class="GtkCellRendererPixbuf" id="cellrenderertext3"/>
                           <attributes>

@@ -110,9 +110,25 @@ class ActionSelectorSimple(gtk.Window):
         except Exception, e:
             pass
 
+    def on_iconviewActions_activated(self, iconview):
+        try:
+            item = self._get_selected_iconview_item(iconview)
+            self.emit('execute-action', self)
+
+        except Exception, e:
+            pass
+
     def on_iconviewInterfaces_buttonReleased(self, iconview, event):
         try:
             self.interface = self._get_selected_iconview_item_at_pos(iconview, event.x, event.y)
+            self._load_actions(self.interface)
+
+        except Exception, e:
+            pass
+
+    def on_iconviewInterfaces_changed(self, iconview):
+        try:
+            self.interface = self._get_selected_iconview_item(iconview)
             self._load_actions(self.interface)
 
         except Exception, e:
@@ -200,14 +216,14 @@ class ActionSelectorSimple(gtk.Window):
     def new_device(self, udev_signals, gudevice):
         if self.device.get_sysfs_path() in gudevice.get_sysfs_path():
             self._load_interfaces()
-    
+
     def remove_device(self, udev_signals, gudevice):
         if self.device.get_sysfs_path() == gudevice.get_sysfs_path():
             gtk.main_quit()
             return
         self._load_interfaces()
 
-    
+
 gobject.type_register(ActionSelectorSimple)
 gobject.signal_new(
     'execute-action', ActionSelectorSimple,

@@ -7,7 +7,6 @@ import re
 
 class InterfaceClass():
 
-
     def __init__(self, sysfspath):
         self.sysfspath = sysfspath
         self.client = gudev.Client('usb')

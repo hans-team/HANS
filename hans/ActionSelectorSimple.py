@@ -22,8 +22,8 @@ ICONVIEW_ICON_SIZE = 68
 ICONVIEW_COLUMN_WIDTH = 140
 
 class ActionSelectorSimple(gtk.Window):
-    __gtype_name__ = "ActionSelectorSimple"
 
+    __gtype_name__ = "ActionSelectorSimple"
 
     def __init__(self, device=None, execute_callback=None):
         gtk.Window.__init__(self)
@@ -56,6 +56,7 @@ class ActionSelectorSimple(gtk.Window):
         self.lblTitle = builder.get_object('lblTitle')
 
         title = 'HANS: %s %s' % (_('Actions for device'), device.get_formated_name())
+        title = device.get_formated_name()
         title = '<big><big><b>%s</b></big></big>' % (title,)
         self.lblTitle.set_markup(title)
 
@@ -76,8 +77,9 @@ class ActionSelectorSimple(gtk.Window):
         self._load_interfaces()
 
         self.udev_signals = UdevSignals.UdevSignals()
-        self.udev_signals.connect('added', self.new_device)
-        self.udev_signals.connect('removed', self.remove_device)
+        self.udev_signals.connect('added', self.on_device_added)
+        self.udev_signals.connect('removed', self.on_device_removed)
+
         self.show()
 
     def get_selected_device(self):
@@ -145,7 +147,7 @@ class ActionSelectorSimple(gtk.Window):
             item = model.get_value(model.get_iter(path), 5)
 
         except Exception, e:
-            print e
+            logging.warning(e)
 
         return item
 
@@ -161,7 +163,7 @@ class ActionSelectorSimple(gtk.Window):
             item = model.get_value(model.get_iter(path), 5)
 
         except Exception, e:
-            print e
+            logging.warning(e)
             raise e
 
         return item
@@ -213,13 +215,13 @@ class ActionSelectorSimple(gtk.Window):
 
         self.iconviewActions.set_model(store)
 
-    def new_device(self, udev_signals, gudevice):
+    def on_device_added(self, udev_signals, gudevice):
         if self.device.get_sysfs_path() in gudevice.get_sysfs_path():
             self._load_interfaces()
 
-    def remove_device(self, udev_signals, gudevice):
+    def on_device_removed(self, udev_signals, gudevice):
         if self.device.get_sysfs_path() == gudevice.get_sysfs_path():
-            gtk.main_quit()
+            self.destroy()
             return
         self._load_interfaces()
 

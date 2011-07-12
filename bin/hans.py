@@ -47,11 +47,7 @@ from hans import (ActionSelectorSimple, ActionLauncher)
 from hans.model import (DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry)
 from hans.utils import notify
 
-
 gettext.textdomain('hans')
-
-LOG_LEVEL = logging.DEBUG
-
 
 class HansCore():
 
@@ -84,11 +80,11 @@ class HansCore():
         set_as_default = dialog.get_set_as_default()
         #dialog.destroy()
 
-        print '--------------------'
-        print selected_interface
-        print selected_actions
-        print set_as_default
-        print '--------------------'
+        logging.debug('--------------------')
+        logging.debug(selected_interface)
+        logging.debug(selected_actions)
+        logging.debug(set_as_default)
+        logging.debug('--------------------')
 
         if set_as_default:
             de = dialog.device.get_defaults_entry()

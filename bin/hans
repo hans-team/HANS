@@ -1,4 +1,4 @@
 #!/bin/bash
 
 export DISPLAY=:0
-sudo -u ahernandez python /home/ahernandez/dev/HANS/bin/hans -p $1 &>> /tmp/hans.log &
+sudo -u ahernandez python /home/ahernandez/dev/HANS/bin/hans.py -p $1 &>> /tmp/hans.log &

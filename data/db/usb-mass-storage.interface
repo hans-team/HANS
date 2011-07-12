@@ -1,7 +1,9 @@
 [Interface Entry]
-Name=Dispositivo de almacenamiento
-Notify=Has conectado un dispositivo
+Name=Storage device
+Notify=Storage device connected
 Icon=
 Action=open
 Recommend-Pkg= 
 
+Name[es_ES]=Dispositivo de almacenamiento
+Notify[es_ES]=Has conectado un dispositivo de almacenamiento

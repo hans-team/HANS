@@ -27,12 +27,12 @@ class ActionEntry(IniFile):
 
     # start standard keys
     def get_name(self):
-        return self.get('Name')
+        return self.get('Name', locale=True)
     def set_name(self, name):
         self.set('Name', name)
 
     def get_comment(self):
-        return self.get('Comment')
+        return self.get('Comment', locale=True)
     def set_comment(self, comment):
         self.set('Comment', comment)
 

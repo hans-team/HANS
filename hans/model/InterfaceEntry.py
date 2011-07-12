@@ -73,12 +73,12 @@ class InterfaceEntry(IniFile):
 
     # start standard keys
     def get_name(self):
-        return self.get('Name')
+        return self.get('Name', locale=True)
     def set_name(self, name):
         self.set('Name', name)
 
     def get_notify(self):
-        return self.get('Notify')
+        return self.get('Notify', locale=True)
 
     def get_interface_class(self):
         return self.udev_object

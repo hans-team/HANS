@@ -6,3 +6,6 @@ Icon=accessories-calculator
 Exec=/usr/bin/gcalctool
 MimeType=
 Interactive=true
+
+Name[es_ES]=Calculadora
+Comment[es_ES]=Abre la calculadora

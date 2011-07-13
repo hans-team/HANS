@@ -4,6 +4,7 @@ import gudev
 import re
 import InterfaceEntry
 import re
+import sys
 
 class InterfaceClass():
 
@@ -21,20 +22,22 @@ class InterfaceClass():
         return self.int_udev
 
     def get_formated_name(self):
-        inttype = self.int_udev.get_property('INTERFACETYPE')
+        inttype = self.get_interface_type()
         regexp = re.compile('x-usb-device/[a-z]+')
-        if not regexp.match(inttype):
+        if not regexp.match(str(inttype)):
             print "The device type must be x-usb-device/'name_of_device'"
+            print str(inttype)
             sys.exit(1)
 
         inttype = inttype.split("/")[1].replace('-', ' ').capitalize()
         return inttype
 
     def get_interface_name(self):
-        inttype = self.int_udev.get_property('INTERFACETYPE')
+        inttype = self.get_interface_type()
         regexp = re.compile('x-usb-device/[a-z]+')
-        if not regexp.match(inttype):
+        if not regexp.match(str(inttype)):
             print "The device type must be x-usb-device/'name_of_device'"
+            print str(inttype)
             sys.exit(1)
 
         return inttype.split("/")[1]

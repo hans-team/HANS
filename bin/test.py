@@ -36,14 +36,13 @@ LOG_LEVEL = logging.DEBUG
 LOG_FORMAT = '%(asctime)s %(levelname)s - %(message)s'
 LOG_DATE_FORMAT = '%H:%M:%S'
 
-
 def usage():
     print "Usage: hans-core.py [-p|--path]"
 
 if __name__ == "__main__":
     
     try:
-        options, remainder = getopt.gnu_getopt(argvs, 'p:', [
+        options, remainder = getopt.gnu_getopt(sys.argv[1:], 'p:', [
                                                              'path=',
                                                              ])
     except getopt.GetoptError:
@@ -66,19 +65,23 @@ if __name__ == "__main__":
         print "[-p|--path] option is required"
         usage()
         sys.exit(2)
-
+    #if pid == 0:
     sysfspath = path_dev
+    print os.path.expanduser('~')
+    print sysfspath
     device = DeviceClass.DeviceClass(sysfspath)
 
-    notify("HANS - New "+device.get_type_device()+" connected ", device.get_formated_name(), device.get_pixbuf())
+#    notify("HANS - New "+device.get_device_type()+" connected ", device.get_formated_name(), device.get_pixbuf())
 
-        #dialog = ActionSelectorDialog.ActionSelectorDialog(device, execute_callback)
-        #dialog.main()
+ #   dialog = ActionSelectorSimple.ActionSelectorSimple(device, on_actionExecuted)
+ #   dialog.main()
 
     #gobject.MainLoop().run()
     
     #except Exception, e:
     #    print e
     t = HansThread.HansThread(device)
-    t.start()
-
+    #t.start()
+    t.run()
+    #else:
+     #   os._exit(0)

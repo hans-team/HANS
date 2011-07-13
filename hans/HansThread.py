@@ -1,22 +1,24 @@
 
 import gtk
+import time
 import threading
 from . import (ActionSelectorSimple, ActionLauncher)
 from model import (DeviceClass, InterfaceEntry)
 from utils import notify
 
-class HansThread(threading.Thread):
+class HansThread():#threading.Thread):
 
     def __init__(self, device):
-        threading.Thread.__init__(self)
+#        threading.Thread.__init__(self)
         self.device = device
 
     def run(self):
 
-        notify("HANS - New device connected", self.device.get_formated_name(), self.device.get_pixbuf())
+        notify("HANS - New "+ self.device.get_device_type() +" connected", self.device.get_formated_name(), self.device.get_pixbuf())
 
-        defaults = self.device.get_defaults_entry()
-        action_list = defaults.get_actions()
+        #defaults = self.device.get_defaults_entry()
+        #action_list = defaults.get_actions()
+        action_list=list()
 
         if len(action_list) != 0:
             interface_filename = defaults.get_interface()

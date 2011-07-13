@@ -1,18 +1,17 @@
+
 import pynotify
-
-
-from hans.hansconfig import get_data_path
-import gettext
 import os
 import gtk
 import sys
-from gettext import gettext as _
-gettext.textdomain('hans')
+from hans import _
+from hans.hansconfig import get_data_path
+
 
 DEFAULT_ICON_INTERFACE = 'media/default-icon-interface.svg'
 DEFAULT_ICON_DEVICE = 'media/default-icon-device.svg'
 DEFAULT_ICON_ACTION = 'media/default-icon-action.svg'
 DEFAULT_ICON_SIZE = 48
+
 
 def get_default_icon_interface():
     return os.path.join(get_data_path(), DEFAULT_ICON_INTERFACE)
@@ -23,9 +22,8 @@ def get_default_icon_device():
 def get_default_icon_action():
     return os.path.join(get_data_path(), DEFAULT_ICON_ACTION)
 
-
 def notify(title, message, icon, timeout=None):
-    if not pynotify.init("HANS Notifications"):
+    if not pynotify.init("HANS " + _("Notifications")):
         sys.exit(1)
 #    icon_notify=None
 #    if icon==None:

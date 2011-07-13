@@ -3,20 +3,14 @@
 # This file is in the public domain
 ### END LICENSE
 
-import os
 import gtk
 import pango
 import types
 import gobject
-import gudev
+import UdevSignals
+from hans import _
 from hans.helpers import get_builder
 from hans.model import (InterfaceEntry, ActionEntry)
-
-import gettext
-import UdevSignals
-from gettext import gettext as _
-
-gettext.textdomain('hans')
 
 ICONVIEW_ICON_SIZE = 68
 ICONVIEW_COLUMN_WIDTH = 140
@@ -55,7 +49,6 @@ class ActionSelectorSimple(gtk.Window):
         self.iconviewActions = builder.get_object('iconviewActions')
         self.lblTitle = builder.get_object('lblTitle')
 
-        title = 'HANS: %s %s' % (_('Actions for device'), device.get_formated_name())
         title = device.get_formated_name()
         title = '<big><big><b>%s</b></big></big>' % (title,)
         self.lblTitle.set_markup(title)

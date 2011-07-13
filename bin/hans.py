@@ -24,14 +24,7 @@
 import sys
 import getopt
 import logging
-import string
-import pynotify
 import os
-import re
-import gtk
-import gettext
-import pwd
-from gettext import gettext as _
 
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
@@ -43,11 +36,9 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
 
-from hans import (ActionSelectorSimple, ActionLauncher)
+from hans import (_, utils, ActionSelectorSimple, ActionLauncher)
 from hans.model import (DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry)
 from hans.utils import notify
-
-gettext.textdomain('hans')
 
 class HansCore():
 
@@ -56,9 +47,10 @@ class HansCore():
 
     def main(self):
 
+        logging.debug(_('Reading device %s') % self.device_path)
         self.device = DeviceClass.DeviceClass(self.device_path)
 
-        notify("HANS - New device connected", self.device.get_formated_name(), self.device.get_pixbuf())
+        notify("HANS - %s" % (_("New device connected",)), self.device.get_formated_name(), self.device.get_pixbuf())
 
         defaults = self.device.get_defaults_entry()
         action_list = defaults.get_actions()

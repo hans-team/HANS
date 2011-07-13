@@ -7,7 +7,7 @@
     <property name="width_request">640</property>
     <property name="height_request">480</property>
     <property name="no_show_all">True</property>
-    <property name="title" translatable="yes">Plauncher</property>
+    <property name="title" translatable="yes">HANS Action Selector</property>
     <property name="window_position">center-always</property>
     <property name="icon">../media/icon.png</property>
     <signal name="destroy" handler="on_destroy"/>

@@ -2,5 +2,10 @@
 import gettext
 
 gettext.textdomain('hans')
-lang = gettext.translation('hans')
-_ = lang.gettext
+
+try:
+    lang = gettext.translation('hans')
+    _ = lang.gettext
+
+except:
+    _ = gettext.gettext

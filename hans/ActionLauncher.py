@@ -1,8 +1,4 @@
 
-
-import os
-
-import ActionSelectorDialog
 from actions import *
 
 class ActionLauncher:
@@ -20,16 +16,16 @@ class ActionLauncher:
 
             try:
                 action_entry = self._action_list[action_name]
-                action_instance = self._get_action_instance(action_entry)
+                action_instance = self._get_action_instance(action_name, action_entry)
                 action_instance.execute(self._interface_entry)
 
             except Exception, e:
                 raise e
 
-    def _get_action_instance(self, action_entry):
+    def _get_action_instance(self, action_name, action_entry):
 
         try:
-            action_name = action_entry.get_name() + 'Action'
+            action_name = action_name.capitalize() + 'Action'
             action_module = globals()[action_name]
 
         except KeyError, e:

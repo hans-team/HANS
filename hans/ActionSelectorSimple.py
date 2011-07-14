@@ -3,27 +3,21 @@
 # This file is in the public domain
 ### END LICENSE
 
-import os
 import gtk
 import pango
 import types
 import gobject
-import gudev
+import UdevSignals
+from hans import _
 from hans.helpers import get_builder
 from hans.model import (InterfaceEntry, ActionEntry)
-
-import gettext
-import UdevSignals
-from gettext import gettext as _
-
-gettext.textdomain('hans')
 
 ICONVIEW_ICON_SIZE = 68
 ICONVIEW_COLUMN_WIDTH = 140
 
 class ActionSelectorSimple(gtk.Window):
-    __gtype_name__ = "ActionSelectorSimple"
 
+    __gtype_name__ = "ActionSelectorSimple"
 
     def __init__(self, device=None, execute_callback=None):
         gtk.Window.__init__(self)
@@ -55,7 +49,7 @@ class ActionSelectorSimple(gtk.Window):
         self.iconviewActions = builder.get_object('iconviewActions')
         self.lblTitle = builder.get_object('lblTitle')
 
-        title = 'HANS: %s %s' % (_('Actions for device'), device.get_formated_name())
+        title = device.get_formated_name()
         title = '<big><big><b>%s</b></big></big>' % (title,)
         self.lblTitle.set_markup(title)
 
@@ -76,8 +70,9 @@ class ActionSelectorSimple(gtk.Window):
         self._load_interfaces()
 
         self.udev_signals = UdevSignals.UdevSignals()
-        self.udev_signals.connect('added', self.new_device)
-        self.udev_signals.connect('removed', self.remove_device)
+        self.udev_signals.connect('added', self.on_device_added)
+        self.udev_signals.connect('removed', self.on_device_removed)
+
         self.show()
 
     def get_selected_device(self):
@@ -110,9 +105,25 @@ class ActionSelectorSimple(gtk.Window):
         except Exception, e:
             pass
 
+    def on_iconviewActions_activated(self, iconview):
+        try:
+            item = self._get_selected_iconview_item(iconview)
+            self.emit('execute-action', self)
+
+        except Exception, e:
+            pass
+
     def on_iconviewInterfaces_buttonReleased(self, iconview, event):
         try:
             self.interface = self._get_selected_iconview_item_at_pos(iconview, event.x, event.y)
+            self._load_actions(self.interface)
+
+        except Exception, e:
+            pass
+
+    def on_iconviewInterfaces_changed(self, iconview):
+        try:
+            self.interface = self._get_selected_iconview_item(iconview)
             self._load_actions(self.interface)
 
         except Exception, e:
@@ -129,7 +140,7 @@ class ActionSelectorSimple(gtk.Window):
             item = model.get_value(model.get_iter(path), 5)
 
         except Exception, e:
-            print e
+            logging.warning(e)
 
         return item
 
@@ -145,7 +156,7 @@ class ActionSelectorSimple(gtk.Window):
             item = model.get_value(model.get_iter(path), 5)
 
         except Exception, e:
-            print e
+            logging.warning(e)
             raise e
 
         return item
@@ -197,17 +208,17 @@ class ActionSelectorSimple(gtk.Window):
 
         self.iconviewActions.set_model(store)
 
-    def new_device(self, udev_signals, gudevice):
+    def on_device_added(self, udev_signals, gudevice):
         if self.device.get_sysfs_path() in gudevice.get_sysfs_path():
             self._load_interfaces()
-    
-    def remove_device(self, udev_signals, gudevice):
+
+    def on_device_removed(self, udev_signals, gudevice):
         if self.device.get_sysfs_path() == gudevice.get_sysfs_path():
-            gtk.main_quit()
+            self.destroy()
             return
         self._load_interfaces()
 
-    
+
 gobject.type_register(ActionSelectorSimple)
 gobject.signal_new(
     'execute-action', ActionSelectorSimple,

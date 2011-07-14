@@ -1,16 +1,8 @@
 #!/usr/bin/python
 
 import sys
-import getopt
 import logging
-import ConfigParser
-import string
-import pynotify
 import os
-import re
-import time
-import gtk
-import threading
 
 # Add project root directory (enable symlink, and trunk execution).
 PROJECT_ROOT_DIRECTORY = os.path.abspath(
@@ -21,12 +13,8 @@ if (os.path.exists(os.path.join(PROJECT_ROOT_DIRECTORY, 'hans'))
     sys.path.insert(0, PROJECT_ROOT_DIRECTORY)
     os.putenv('PYTHONPATH', PROJECT_ROOT_DIRECTORY) # for subprocesses
 
-from hans import (
-    HansThread, ActionLauncher, ActionSelectorSimple, ActionSelectorDialog, actions
-)
-
+from hans import _, ActionLauncher, ActionSelectorSimple
 from hans.model import (DeviceClass, InterfaceClass, InterfaceEntry, DefaultsEntry)
-
 from hans.utils import notify
 
 HANS_PATH_DB = PROJECT_ROOT_DIRECTORY + '/db'

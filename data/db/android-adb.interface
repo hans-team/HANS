@@ -1,7 +1,9 @@
 [Interface Entry]
-Name=Interfaz de depuración ADB
-Notify=Has conectado un dispositivo
+Name=ADB Debugger Interface
+Notify=ADB Debugger Interface connected
 Icon= 
-Action=calc;open
-Recommend-Pkg= 
-
+Action=calc
+Recommend-Pkg=
+ 
+Name[es_ES]=Interfaz de depuración ADB
+Notify[es_ES]=Interfaz de depuración ADB conectada

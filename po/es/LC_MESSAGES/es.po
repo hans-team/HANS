@@ -1,0 +1,55 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2011 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# AHernandez <ahernandez@emergya.com>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-07-13 10:50+0200\n"
+"PO-Revision-Date: 2011-07-13 10:51+0200\n"
+"Last-Translator: AHernandez <ahernandez@emergya.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../bin/hans.py:52
+#, python-format
+msgid "Reading device %s"
+msgstr "Leyendo dispositivo %s"
+
+#: ../../bin/hans.py:55
+msgid "New device connected"
+msgstr "Nuevo dispositivo conectado"
+
+#: ../../hans/utils.py:33
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: ../../hans/FilechooserDialog.py:42
+msgid "Images file"
+msgstr "Ficheros de imágenes"
+
+#: ../../hans/FilechooserDialog.py:50
+msgid "All files"
+msgstr "Todos los ficheros"
+
+#: ../../hans/ActionSelectorSimple.py:58
+msgid "Action selector"
+msgstr "Selector de acciones"
+
+#: ../../hans/model/DeviceClass.py:110
+msgid "camera photo"
+msgstr "cámara fotográfica"
+
+#: ../../hans/model/DeviceClass.py:112
+msgid "multimedia player"
+msgstr "reproductor multimedia"
+
+#: ../../hans/model/DeviceClass.py:119
+msgid "device"
+msgstr "dispositivo"

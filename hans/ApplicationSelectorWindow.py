@@ -74,6 +74,8 @@ class ApplicationSelectorWindow(gtk.Window):
     def on_btnSelectClicked(self, button):
         selection = self.treeviewApplications.get_selection()
         (model, iter) = selection.get_selected()
+        if iter == None:
+            return
         path = model.get_path(iter)
         self.selected_app = model.get_value(iter, 0)
         self.emit_execute_action(path, self.selected_app)

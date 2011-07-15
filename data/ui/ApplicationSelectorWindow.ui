@@ -5,7 +5,7 @@
   <!-- interface-naming-policy project-wide -->
   
   <object class="ApplicationSelectorWindow" id="applicationselector_window">
-    <property name="width_request">520</property>
+    <property name="width_request">560</property>
     <property name="height_request">450</property>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Application Selector</property>

@@ -102,8 +102,8 @@ class DeviceClass():
         self.de = DefaultsEntry.DefaultsEntry(filename_default)
         return self.de
 
-    def get_type_device(self):
-        num_interfaces = self.get_number_interfaces()
+    def get_device_type(self):
+        num_interfaces=self.get_number_interfaces()
         if self.dev_udev.get_property('ICON'):
             filename = self.dev_udev.get_property('ICON')
             if filename == 'camera-photo':

@@ -29,7 +29,7 @@ ACTION=="add", SUBSYSTEM=="block", ENV{ID_TYPE}=="disk", ENV{DEVTYPE}=="disk", E
 ENV{ID_DRIVE_FLASH_SM}=="1", ENV{ICON}="drive-removable-media", GOTO="icon_assignment"
 
 ACTION=="add|change", SUBSYSTEM=="block", ENV{ID_TYPE}=="disk", ENV{DEVTYPE}=="disk", ENV{ID_BUS}=="usb", \
-ENV{ICON}="gnome-dev-media-sm", GOTO="icon_assignment"
+ENV{ICON}="drive-removable-media-usb", GOTO="icon_assignment"
 
 ACTION=="add", SUBSYSTEM=="net", ENV{DEVTYPE}=="wlan", ENV{ICON}="network-wireless", GOTO="icon_assignment"
 
@@ -733,7 +733,7 @@ LABEL="usbclass_07h_end"
 # Spec used to create the rule: http://www.usb.org/developers/defined_class
 
 ACTION=="add", SUBSYSTEM=="usb", \
-	ATTR{bInterfaceClass}=="0B", \
+	ATTR{bInterfaceClass}=="0b", \
 	ENV{INTERFACETYPE}="x-usb-device/smart-card", \
 	ENV{HANS_TAG}!="1", \
 	ENV{HANS_TAG}="1"

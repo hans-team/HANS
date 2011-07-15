@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=q.921m-data
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=q.921m-data
+Notify[es_ES]=New device connected

@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=printer
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=printer
+Notify[es_ES]=New device connected

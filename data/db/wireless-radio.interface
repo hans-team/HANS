@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=wireless-radio
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=wireless-radio
+Notify[es_ES]=New device connected

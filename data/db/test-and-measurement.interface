@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=test-and-measurement
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=test-and-measurement
+Notify[es_ES]=New device connected

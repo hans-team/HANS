@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=video-streaming
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=video-streaming
+Notify[es_ES]=New device connected

@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=multi-channel
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=multi-channel
+Notify[es_ES]=New device connected

@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=diagnostics
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=diagnostics
+Notify[es_ES]=New device connected

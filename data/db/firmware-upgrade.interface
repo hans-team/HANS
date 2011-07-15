@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=firmware-upgrade
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=firmware-upgrade
+Notify[es_ES]=New device connected

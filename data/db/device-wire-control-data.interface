@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=device-wire-control-data
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=device-wire-control-data
+Notify[es_ES]=New device connected

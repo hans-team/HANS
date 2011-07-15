@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=v.42bis-data
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=v.42bis-data
+Notify[es_ES]=New device connected

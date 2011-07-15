@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=bluetooth-amp-controller
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=bluetooth-amp-controller
+Notify[es_ES]=New device connected

@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=ultra-wideband-radio-control
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=ultra-wideband-radio-control
+Notify[es_ES]=New device connected

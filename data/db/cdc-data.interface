@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=cdc-data
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=cdc-data
+Notify[es_ES]=New device connected

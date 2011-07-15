@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=device-management
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=device-management
+Notify[es_ES]=New device connected

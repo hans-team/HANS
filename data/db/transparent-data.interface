@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=transparent-data
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=transparent-data
+Notify[es_ES]=New device connected

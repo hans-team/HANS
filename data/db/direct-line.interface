@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=direct-line
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=direct-line
+Notify[es_ES]=New device connected

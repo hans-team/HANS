@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=modem-gsm
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=modem-gsm
+Notify[es_ES]=New device connected

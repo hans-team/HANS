@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=ethernet-emulation
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=ethernet-emulation
+Notify[es_ES]=New device connected

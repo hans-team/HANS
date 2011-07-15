@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=miscellanous
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=miscellanous
+Notify[es_ES]=New device connected

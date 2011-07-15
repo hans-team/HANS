@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=wireless-usb-wire-adapter
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=wireless-usb-wire-adapter
+Notify[es_ES]=New device connected

@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=palm-sync
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=palm-sync
+Notify[es_ES]=New device connected

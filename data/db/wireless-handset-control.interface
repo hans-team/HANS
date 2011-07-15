@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=wireless-handset-control
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=wireless-handset-control
+Notify[es_ES]=New device connected

@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=ptp-imaging-device
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=ptp-imaging-device
+Notify[es_ES]=New device connected

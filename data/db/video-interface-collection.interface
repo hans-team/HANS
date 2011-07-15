@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=video-interface-collection
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=video-interface-collection
+Notify[es_ES]=New device connected

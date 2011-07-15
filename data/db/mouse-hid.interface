@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=mouse-hid
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=mouse-hid
+Notify[es_ES]=New device connected

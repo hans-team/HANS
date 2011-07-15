@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=modem-3g
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=modem-3g
+Notify[es_ES]=New device connected

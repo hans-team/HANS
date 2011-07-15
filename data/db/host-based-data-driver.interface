@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=host-based-data-driver
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=host-based-data-driver
+Notify[es_ES]=New device connected

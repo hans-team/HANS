@@ -1,0 +1,9 @@
+[Interface Entry]
+Name=personal-healthcare
+Notify=New device connected
+Icon=
+Action=
+Recommend-Pkg=
+ 
+Name[es_ES]=personal-healthcare
+Notify[es_ES]=New device connected

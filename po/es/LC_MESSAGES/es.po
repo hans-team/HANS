@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-13 10:50+0200\n"
+"POT-Creation-Date: 2011-07-15 11:22+0200\n"
 "PO-Revision-Date: 2011-07-13 10:51+0200\n"
 "Last-Translator: AHernandez <ahernandez@emergya.com>\n"
 "Language-Team: Spanish\n"
@@ -17,39 +17,71 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../bin/hans.py:52
+#: ../bin/hans.py:50 ../bin/hans.py:51
 #, python-format
 msgid "Reading device %s"
 msgstr "Leyendo dispositivo %s"
 
-#: ../../bin/hans.py:55
+#: ../bin/hans.py:54
 msgid "New device connected"
 msgstr "Nuevo dispositivo conectado"
 
-#: ../../hans/utils.py:33
+#: ../hans/utils.py:26
 msgid "Notifications"
 msgstr "Notificaciones"
 
-#: ../../hans/FilechooserDialog.py:42
+#: ../hans/FilechooserDialog.py:42
 msgid "Images file"
 msgstr "Ficheros de imágenes"
 
-#: ../../hans/FilechooserDialog.py:50
+#: ../hans/FilechooserDialog.py:50
 msgid "All files"
 msgstr "Todos los ficheros"
 
-#: ../../hans/ActionSelectorSimple.py:58
+#: ../hans/ActionSelectorSimple.py:56
 msgid "Action selector"
 msgstr "Selector de acciones"
 
-#: ../../hans/model/DeviceClass.py:110
+#: ../hans/model/DeviceClass.py:110
 msgid "camera photo"
 msgstr "cámara fotográfica"
 
-#: ../../hans/model/DeviceClass.py:112
+#: ../hans/model/DeviceClass.py:112
 msgid "multimedia player"
 msgstr "reproductor multimedia"
 
-#: ../../hans/model/DeviceClass.py:119
+#: ../hans/model/DeviceClass.py:119
 msgid "device"
 msgstr "dispositivo"
+
+#: ../hans/ApplicationSelectorWindow.py:64
+msgid "Select an application to open"
+msgstr "Selecciona una aplicación para abrir"
+
+#: ../hans/ApplicationSelectorWindow.py:66
+msgid "Application selector"
+msgstr "Selector de aplicaciones"
+
+#: ../hans/ApplicationSelectorWindow.py:68
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../hans/ApplicationSelectorWindow.py:69
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../hans/ApplicationSelectorWindow.py:97
+msgid "Applications"
+msgstr "Aplicaciones"
+
+#: ../hans/ApplicationSelectorWindow.py:125
+msgid "Default application"
+msgstr "Aplicación por defecto"
+
+#: ../hans/ApplicationSelectorWindow.py:128
+msgid "Recommended applications"
+msgstr "Aplicaciones recomendadas"
+
+#: ../hans/ApplicationSelectorWindow.py:131
+msgid "Other applications"
+msgstr "Otras aplicaciones"

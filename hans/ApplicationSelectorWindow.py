@@ -61,8 +61,10 @@ class ApplicationSelectorWindow(gtk.Window):
         self.show()
 
     def _translate(self):
+        description = _('Select an application to open')
+        description = '<b>%s &lt;&lt;%s&gt;&gt;</b>' % (description, self.mimetype)
         self.set_title(_('Application selector'))
-        self.lblDescription.set_text(_('Select an application to open <<%s>>') % ('mime',))
+        self.lblDescription.set_markup(description)
         self.btnSelect.set_label(_('Select'))
         self.btnCancel.set_label(_('Cancel'))
 
@@ -70,8 +72,11 @@ class ApplicationSelectorWindow(gtk.Window):
         gtk.main_quit()
 
     def on_btnSelectClicked(self, button):
-        #self.destroy()
-        pass
+        selection = self.treeviewApplications.get_selection()
+        (model, iter) = selection.get_selected()
+        path = model.get_path(iter)
+        self.selected_app = model.get_value(iter, 0)
+        self.emit_execute_action(path, self.selected_app)
 
     def on_btnCancelClicked(self, button):
         self.destroy()
@@ -80,8 +85,19 @@ class ApplicationSelectorWindow(gtk.Window):
         model = treeview.get_model()
         iter = model.get_iter(path)
         self.selected_app = model.get_value(iter, 0)
-        self.emit('execute-application', self.selected_app)
-        self.destroy()
+        self.emit_execute_action(path, self.selected_app)
+
+    def emit_execute_action(self, path, app_info):
+
+        if isinstance(app_info, HeaderAppInfo):
+            if self.treeviewApplications.row_expanded(path):
+                self.treeviewApplications.collapse_row(path)
+            else:
+                self.treeviewApplications.expand_row(path, False)
+
+        else:
+            self.emit('execute-application', self.selected_app)
+            self.destroy()
 
     def _init_treeview(self):
 
@@ -97,8 +113,9 @@ class ApplicationSelectorWindow(gtk.Window):
         tvcolumn.set_cell_data_func(cell, self._render_column_text)
 
         self.treeviewApplications.append_column(tvcolumn)
-        self.treeviewApplications.set_search_column(1)
-        #self.treeviewApplications.set_show_expanders(False)
+        self.treeviewApplications.set_enable_search(True)
+        self.treeviewApplications.set_search_column(0)
+        self.treeviewApplications.set_show_expanders(True)
 
         treestore = gtk.TreeStore(object)
         self.treeviewApplications.set_model(treestore)
@@ -110,20 +127,24 @@ class ApplicationSelectorWindow(gtk.Window):
 
         self.added_applications = []
 
-        self.mimetype = 'text/xml'
+        #self.mimetype = 'text/xml'
 
         app_list = gio.app_info_get_default_for_type(self.mimetype, True)
-        row = self._load_application_group('Default application', '', [app_list], treestore)
+        row = self._load_application_group(_('Default application'), '', [app_list], treestore)
 
         app_list = gio.app_info_get_all_for_type(self.mimetype)
-        self._load_application_group('Recommended applications', '', app_list, treestore)
+        self._load_application_group(_('Recommended applications'), '', app_list, treestore)
 
         app_list = gio.app_info_get_all()
-        self._load_application_group('Other applications', '', app_list, treestore)
+        self._load_application_group(_('Other applications'), '', app_list, treestore)
 
         self.treeviewApplications.set_model(treestore)
         #self.treeviewApplications.expand_all()
-        self.treeviewApplications.expand_row((0,), False)
+
+        try:
+            self.treeviewApplications.expand_row((0,), False)
+        except:
+            pass
 
     def _load_application_group(self, name, description, app_list, treestore):
 
@@ -131,7 +152,7 @@ class ApplicationSelectorWindow(gtk.Window):
         app_list = self._filter_application_list(app_list)
 
         if len(app_list) > 0:
-            dapp = DummyAppInfo(_(name), _(description))
+            dapp = HeaderAppInfo(name, description)
             row = treestore.append(None, [dapp])
             self._load_application_list(row, app_list, treestore)
 
@@ -147,14 +168,13 @@ class ApplicationSelectorWindow(gtk.Window):
     def _filter_application_list(self, app_list):
         _list = []
         for app_info in app_list:
-            if not app_info in self.added_applications and app_info.should_show():
+            if isinstance(app_info, gio.AppInfo) and not app_info in self.added_applications and app_info.should_show():
                 _list.append(app_info)
         return _list
 
     def _render_column_pixbuf(self, column, cell, model, iter):
 
         app_info = model.get_value(iter, 0)
-
         default_theme = gtk.icon_theme_get_default()
 
         try:
@@ -168,10 +188,19 @@ class ApplicationSelectorWindow(gtk.Window):
         cell.set_property('pixbuf', pixbuf)
 
     def _render_column_text(self, column, cell, model, iter):
-        app_info = model.get_value(iter, 0)
-        cell.set_property('text', app_info.get_name())
 
-class DummyAppInfo():
+        app_info = model.get_value(iter, 0)
+
+        if isinstance(app_info, HeaderAppInfo):
+            property = 'markup'
+            text = '<b>%s</b>' % (app_info.get_name(),)
+        else:
+            property = 'text'
+            text = app_info.get_name()
+
+        cell.set_property(property, text)
+
+class HeaderAppInfo():
 
     def __init__(self, name, description=''):
         self.name = name

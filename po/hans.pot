@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-13 10:50+0200\n"
+"POT-Creation-Date: 2011-07-15 11:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,39 +17,71 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../bin/hans.py:52
+#: ../bin/hans.py:50 ../bin/hans.py:51
 #, python-format
 msgid "Reading device %s"
 msgstr ""
 
-#: ../../bin/hans.py:55
+#: ../bin/hans.py:54
 msgid "New device connected"
 msgstr ""
 
-#: ../../hans/utils.py:33
+#: ../hans/utils.py:26
 msgid "Notifications"
 msgstr ""
 
-#: ../../hans/FilechooserDialog.py:42
+#: ../hans/FilechooserDialog.py:42
 msgid "Images file"
 msgstr ""
 
-#: ../../hans/FilechooserDialog.py:50
+#: ../hans/FilechooserDialog.py:50
 msgid "All files"
 msgstr ""
 
-#: ../../hans/ActionSelectorSimple.py:58
+#: ../hans/ActionSelectorSimple.py:56
 msgid "Action selector"
 msgstr ""
 
-#: ../../hans/model/DeviceClass.py:110
+#: ../hans/model/DeviceClass.py:110
 msgid "camera photo"
 msgstr ""
 
-#: ../../hans/model/DeviceClass.py:112
+#: ../hans/model/DeviceClass.py:112
 msgid "multimedia player"
 msgstr ""
 
-#: ../../hans/model/DeviceClass.py:119
+#: ../hans/model/DeviceClass.py:119
 msgid "device"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:64
+msgid "Select an application to open"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:66
+msgid "Application selector"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:68
+msgid "Select"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:69
+msgid "Cancel"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:97
+msgid "Applications"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:125
+msgid "Default application"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:128
+msgid "Recommended applications"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:131
+msgid "Other applications"
 msgstr ""

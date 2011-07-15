@@ -44,7 +44,7 @@ for i in $(seq 0 $((${#SEATS3[*]} - 1))); do
 
         . /etc/default/locale #Execute for assignament LANG environment
         #Launch HANS in user session
-        sudo -iu $USER /home/$USER/Proyectos/emergya/HANS/bin/hans.py -p $1 &> /tmp/hans.log &
+        sudo -iu $USER /home/$USER/Proyectos/emergya/HANS/bin/hans.py -p $1 &>> /tmp/hans.log &
         
     fi
 done

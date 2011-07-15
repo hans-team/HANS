@@ -54,12 +54,13 @@ def launch_actions(interface_entry, action_list):
 
 if __name__ == "__main__":
 
-    print _('Action selector')
+    #print _('Action selector')
 
-    #sysfspath = '/sys/devices/pci0000:00/0000:00:1d.7/usb1/1-5'
-    #device = DeviceClass.DeviceClass(sysfspath)
+    sysfspath = '/sys/devices/pci0000:00/0000:00:1d.7/usb1/1-5'
+    sysfspath = '/sys/devices/pci0000:00/0000:00:1d.7/usb1/1-5'
+    device = DeviceClass.DeviceClass(sysfspath)
 
     #notify("HANS - New device connected", device.get_formated_name(), device.get_pixbuf())
 
-    #dialog = ActionSelectorSimple.ActionSelectorSimple(device, on_actionExecuted)
-    #dialog.main()
+    dialog = ActionSelectorSimple.ActionSelectorSimple(device, on_actionExecuted)
+    dialog.main()

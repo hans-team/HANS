@@ -8,6 +8,7 @@ import pango
 import types
 import gobject
 import UdevSignals
+import logging
 from hans import _
 from hans.helpers import get_builder
 from hans.model import (InterfaceEntry, ActionEntry)
@@ -181,11 +182,13 @@ class ActionSelectorSimple(gtk.Window):
         ifaces = self.device.get_interfaces()
         for iface in ifaces:
             iface = iface.get_interface_entry()
-            store.append([
-                iface.get_pixbuf(ICONVIEW_ICON_SIZE), self._get_text(iface),
-                pango.ALIGN_CENTER, ICONVIEW_COLUMN_WIDTH, pango.WRAP_WORD,
-                iface
-            ])
+            action_list = iface.get_actions()
+            if len(action_list) > 0:
+                store.append([
+                    iface.get_pixbuf(ICONVIEW_ICON_SIZE), self._get_text(iface),
+                    pango.ALIGN_CENTER, ICONVIEW_COLUMN_WIDTH, pango.WRAP_WORD,
+                    iface
+                ])
 
         self.iconviewInterfaces.set_model(store)
 

@@ -63,6 +63,9 @@ class HansCore():
             self.launch_actions(interface_entry, action_list)
 
         else:
+            interfaces = self.device.get_interfaces()
+            if len(interfaces) == 0:
+                return
             dialog = ActionSelectorSimple.ActionSelectorSimple(self.device, self.on_actionExecuted)
             dialog.main()
 

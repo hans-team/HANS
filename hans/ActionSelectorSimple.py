@@ -212,11 +212,11 @@ class ActionSelectorSimple(gtk.Window):
         self.iconviewActions.set_model(store)
 
     def on_device_added(self, udev_signals, gudevice):
-        if self.device.get_sysfs_path() in gudevice.get_sysfs_path():
+        if self.device.get_sysfs_path() + '/' in gudevice.get_sysfs_path() + '/':
             self._load_interfaces()
 
     def on_device_removed(self, udev_signals, gudevice):
-        if self.device.get_sysfs_path() == gudevice.get_sysfs_path():
+        if self.device.get_sysfs_path() + '/' == gudevice.get_sysfs_path() + '/':
             self.destroy()
             return
         self._load_interfaces()

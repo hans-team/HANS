@@ -2,7 +2,7 @@
 Name=Storage device
 Notify=Storage device connected
 Icon=
-Action=open
+Action=
 Recommend-Pkg= 
 
 Name[es_ES]=Dispositivo de almacenamiento

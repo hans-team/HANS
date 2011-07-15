@@ -1,7 +1,8 @@
+
+import sys
 import os.path
 from hans import utils
 import gudev
-import re
 import InterfaceEntry
 import re
 

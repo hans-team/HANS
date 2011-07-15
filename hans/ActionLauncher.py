@@ -17,10 +17,11 @@ class ActionLauncher:
             try:
                 action_entry = self._action_list[action_name]
                 action_instance = self._get_action_instance(action_name, action_entry)
+                print 'Instance for action "%s": ' % (action_name,), action_instance
                 action_instance.execute(self._interface_entry)
 
             except Exception, e:
-                raise e
+                print e
 
     def _get_action_instance(self, action_name, action_entry):
 

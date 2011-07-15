@@ -80,9 +80,6 @@ class InterfaceEntry(IniFile):
     def get_notify(self):
         return self.get('Notify', locale=True)
 
-    def get_interface_class(self):
-        return self.udev_object
-
     def get_icon(self, icon_size=utils.DEFAULT_ICON_SIZE, flags=0):
 
         filename = self.get('Icon')

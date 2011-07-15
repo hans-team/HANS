@@ -48,6 +48,7 @@ class HansCore():
     def main(self):
 
         logging.debug(_('Reading device %s') % self.device_path)
+        print _('Reading device %s') % self.device_path
         self.device = DeviceClass.DeviceClass(self.device_path)
 
         notify("HANS - %s" % (_("New device connected",)), self.device.get_formated_name(), self.device.get_pixbuf())

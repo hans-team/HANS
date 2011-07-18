@@ -39,6 +39,7 @@ class ApplicationSelectorWindow(gtk.Window):
 
         self.treeviewApplications = builder.get_object('treeviewApplications')
         self.lblDescription = builder.get_object('lblDescription')
+        self.chkDefaultApplication = builder.get_object('chkDefaultApplication')
         self.btnSelect = builder.get_object('btnSelect')
         self.btnCancel = builder.get_object('btnCancel')
 
@@ -46,8 +47,8 @@ class ApplicationSelectorWindow(gtk.Window):
         self.builder = builder
         self.interface = interface
 
-        self.mimetype = self.interface.get_interface_class().get_interface_type()
-        self.default_app = gio.app_info_get_default_for_type(self.mimetype, True)
+        self.interfacetype = self.interface.get_interface_class().get_interface_type()
+        self.default_app = gio.app_info_get_default_for_type(self.interfacetype, True)
         self.added_applications = []
         self.selected_app = None
 
@@ -62,11 +63,15 @@ class ApplicationSelectorWindow(gtk.Window):
 
     def _translate(self):
         description = _('Select an application to open')
-        description = '<b>%s &lt;&lt;%s&gt;&gt;</b>' % (description, self.mimetype)
+        description = '<b>%s &lt;&lt;%s&gt;&gt;</b>' % (description, self.interfacetype)
         self.set_title(_('Application selector'))
         self.lblDescription.set_markup(description)
+        self.chkDefaultApplication.set_label(_('Check as default application for that interface type') + '.')
         self.btnSelect.set_label(_('Select'))
         self.btnCancel.set_label(_('Cancel'))
+
+    def get_is_default_application(self):
+        return self.chkDefaultApplication.get_active()
 
     def on_deleteEvent(self, widget, data=None):
         gtk.main_quit()
@@ -129,12 +134,12 @@ class ApplicationSelectorWindow(gtk.Window):
 
         self.added_applications = []
 
-        #self.mimetype = 'text/xml'
+        #self.interfacetype = 'text/xml'
 
-        app_list = gio.app_info_get_default_for_type(self.mimetype, True)
+        app_list = gio.app_info_get_default_for_type(self.interfacetype, False)
         row = self._load_application_group(_('Default application'), '', [app_list], treestore)
 
-        app_list = gio.app_info_get_all_for_type(self.mimetype)
+        app_list = gio.app_info_get_all_for_type(self.interfacetype)
         self._load_application_group(_('Recommended applications'), '', app_list, treestore)
 
         app_list = gio.app_info_get_all()

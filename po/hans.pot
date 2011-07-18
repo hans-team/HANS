@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-15 11:22+0200\n"
+"POT-Creation-Date: 2011-07-18 13:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "All files"
 msgstr ""
 
-#: ../hans/ActionSelectorSimple.py:56
+#: ../hans/ActionSelectorSimple.py:57
 msgid "Action selector"
 msgstr ""
 
@@ -54,34 +54,38 @@ msgstr ""
 msgid "device"
 msgstr ""
 
-#: ../hans/ApplicationSelectorWindow.py:64
+#: ../hans/ApplicationSelectorWindow.py:65
 msgid "Select an application to open"
 msgstr ""
 
-#: ../hans/ApplicationSelectorWindow.py:66
+#: ../hans/ApplicationSelectorWindow.py:67
 msgid "Application selector"
 msgstr ""
 
-#: ../hans/ApplicationSelectorWindow.py:68
+#: ../hans/ApplicationSelectorWindow.py:69
+msgid "Check as default application for that interface type"
+msgstr ""
+
+#: ../hans/ApplicationSelectorWindow.py:70
 msgid "Select"
 msgstr ""
 
-#: ../hans/ApplicationSelectorWindow.py:69
+#: ../hans/ApplicationSelectorWindow.py:71
 msgid "Cancel"
 msgstr ""
 
-#: ../hans/ApplicationSelectorWindow.py:97
+#: ../hans/ApplicationSelectorWindow.py:111
 msgid "Applications"
 msgstr ""
 
-#: ../hans/ApplicationSelectorWindow.py:125
+#: ../hans/ApplicationSelectorWindow.py:140
 msgid "Default application"
 msgstr ""
 
-#: ../hans/ApplicationSelectorWindow.py:128
+#: ../hans/ApplicationSelectorWindow.py:143
 msgid "Recommended applications"
 msgstr ""
 
-#: ../hans/ApplicationSelectorWindow.py:131
+#: ../hans/ApplicationSelectorWindow.py:146
 msgid "Other applications"
 msgstr ""

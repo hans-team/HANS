@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-15 11:22+0200\n"
+"POT-Creation-Date: 2011-07-18 13:46+0200\n"
 "PO-Revision-Date: 2011-07-13 10:51+0200\n"
 "Last-Translator: AHernandez <ahernandez@emergya.com>\n"
 "Language-Team: Spanish\n"
@@ -38,7 +38,7 @@ msgstr "Ficheros de imágenes"
 msgid "All files"
 msgstr "Todos los ficheros"
 
-#: ../hans/ActionSelectorSimple.py:56
+#: ../hans/ActionSelectorSimple.py:57
 msgid "Action selector"
 msgstr "Selector de acciones"
 
@@ -54,34 +54,38 @@ msgstr "reproductor multimedia"
 msgid "device"
 msgstr "dispositivo"
 
-#: ../hans/ApplicationSelectorWindow.py:64
+#: ../hans/ApplicationSelectorWindow.py:65
 msgid "Select an application to open"
 msgstr "Selecciona una aplicación para abrir"
 
-#: ../hans/ApplicationSelectorWindow.py:66
+#: ../hans/ApplicationSelectorWindow.py:67
 msgid "Application selector"
 msgstr "Selector de aplicaciones"
 
-#: ../hans/ApplicationSelectorWindow.py:68
+#: ../hans/ApplicationSelectorWindow.py:69
+msgid "Check as default application for that interface type"
+msgstr "Marcar como aplicación por defecto para este tipo de interfaz"
+
+#: ../hans/ApplicationSelectorWindow.py:70
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../hans/ApplicationSelectorWindow.py:69
+#: ../hans/ApplicationSelectorWindow.py:71
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../hans/ApplicationSelectorWindow.py:97
+#: ../hans/ApplicationSelectorWindow.py:111
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: ../hans/ApplicationSelectorWindow.py:125
+#: ../hans/ApplicationSelectorWindow.py:140
 msgid "Default application"
 msgstr "Aplicación por defecto"
 
-#: ../hans/ApplicationSelectorWindow.py:128
+#: ../hans/ApplicationSelectorWindow.py:143
 msgid "Recommended applications"
 msgstr "Aplicaciones recomendadas"
 
-#: ../hans/ApplicationSelectorWindow.py:131
+#: ../hans/ApplicationSelectorWindow.py:146
 msgid "Other applications"
 msgstr "Otras aplicaciones"

@@ -22,20 +22,19 @@ def get_default_icon_device():
 def get_default_icon_action():
     return os.path.join(get_data_path(), DEFAULT_ICON_ACTION)
 
-def notify(title, message, icon, timeout=None, transient=True):
+def notify(title, message, icon, timeout=pynotify.EXPIRES_DEFAULT, transient=True):
+
+    # Desktop Notifications Specification: http://www.galago-project.org/specs/notification/0.9/index.html
 
     if not pynotify.init("HANS " + _("Notifications")):
         return
 
     notify = pynotify.Notification(title, message)
     notify.set_icon_from_pixbuf(icon)
-    # http://www.galago-project.org/specs/notification/0.9/x211.html
     notify.set_category('device.added')
     notify.set_urgency(pynotify.URGENCY_LOW)
     notify.set_hint('transient', transient)
-
-    if not timeout == None:
-        notify.set_timeout(timeout)
+    notify.set_timeout(timeout)
 
     if not notify.show():
         print "Failed to send notification"

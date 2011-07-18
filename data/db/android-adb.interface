@@ -2,7 +2,7 @@
 Name=ADB Debugger Interface
 Notify=ADB Debugger Interface connected
 Icon= 
-Action=calc
+Action=open
 Recommend-Pkg=
  
 Name[es_ES]=Interfaz de depuración ADB

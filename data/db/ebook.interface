@@ -2,6 +2,6 @@
 Name=Ebook
 Notify=Has conectado un ebook
 Icon-Notify= 
-Action=calc;open
+Action=open
 Recommend-Pkg= 
 

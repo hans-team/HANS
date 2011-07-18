@@ -2,6 +2,6 @@
 Name=Interfaz de Chip/Smart Card
 Notify=Has conectado un dispositivo
 Icon= 
-Action=calc;open
+Action=open
 Recommend-Pkg= 
 

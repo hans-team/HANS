@@ -2,7 +2,7 @@
 Name=Interface
 Notify=Interface connected
 Icon= 
-Action=calc;open
+Action=open
 Recommend-Pkg= 
 
 Name[es_ES]=Interfaz

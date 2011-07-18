@@ -64,15 +64,22 @@ class HansCore():
 
         else:
 
+            # If there aren't interfaces or there aren't actions for any interface
+            # don't show the dialog.
+
             interfaces = self.device.get_interfaces()
 
             if len(interfaces) == 0:
                 return
 
-            if len(interfaces) == 1:
-                action_list = interfaces[0].get_interface_entry().get_actions()
-                if len(action_list) == 0:
-                    return
+            actions_count = 0;
+
+            for interface in interfaces:
+                action_list = interface.get_interface_entry().get_actions()
+                actions_count += len(action_list)
+
+            if actions_count == 0:
+                return
 
             dialog = ActionSelectorSimple.ActionSelectorSimple(self.device, self.on_actionExecuted)
             dialog.main()

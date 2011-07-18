@@ -1,9 +1,9 @@
 [Interface Entry]
 Name=bluetooth-adapter
-Notify=New device connected
+Notify=New interface connected
 Icon=
 Action=
 Recommend-Pkg=
  
 Name[es_ES]=bluetooth-adapter
-Notify[es_ES]=New device connected
+Notify[es_ES]=New interface connected

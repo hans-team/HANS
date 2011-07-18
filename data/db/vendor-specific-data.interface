@@ -1,9 +1,9 @@
 [Interface Entry]
 Name=vendor-specific-data
-Notify=New device connected
+Notify=New interface connected
 Icon=
 Action=
 Recommend-Pkg=
  
 Name[es_ES]=vendor-specific-data
-Notify[es_ES]=New device connected
+Notify[es_ES]=New interface connected

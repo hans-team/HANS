@@ -1,9 +1,9 @@
 [Interface Entry]
-Name=Device
-Notify=Device connected
+Name=Interface
+Notify=Interface connected
 Icon= 
 Action=calc;open
 Recommend-Pkg= 
 
-Name[es_ES]=Dispositivo
-Notify[es_ES]=Has conectado un dispositivo
+Name[es_ES]=Interfaz
+Notify[es_ES]=Interfaz conectada

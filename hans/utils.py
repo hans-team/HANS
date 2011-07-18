@@ -22,21 +22,21 @@ def get_default_icon_device():
 def get_default_icon_action():
     return os.path.join(get_data_path(), DEFAULT_ICON_ACTION)
 
-def notify(title, message, icon, timeout=None):
+def notify(title, message, icon, timeout=None, transient=True):
+
     if not pynotify.init("HANS " + _("Notifications")):
-        sys.exit(1)
-#    icon_notify=None
-#    if icon==None:
-#        icon_notify=gtk.gdk.pixbuf_new_from_file(os.path.join(get_data_path(),"media/default-icon-device.svg"))
-#        #icon_notify=gtk.gdk.pixbuf_new_from_file('gnome-dev-removable-usb')
-#    else:
-#        self.icon_notify=gtk.gdk.pixbuf_new_from_file(icon)
+        return
 
     notify = pynotify.Notification(title, message)
     notify.set_icon_from_pixbuf(icon)
-    notify.set_category("device")
+    # http://www.galago-project.org/specs/notification/0.9/x211.html
+    notify.set_category('device.added')
+    notify.set_urgency(pynotify.URGENCY_LOW)
+    notify.set_hint('transient', transient)
+
     if not timeout == None:
         notify.set_timeout(timeout)
+
     if not notify.show():
         print "Failed to send notification"
 

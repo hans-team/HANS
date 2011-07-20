@@ -1,0 +1,7 @@
+./bin/hans.py
+./hans/utils.py
+./hans/FilechooserDialog.py
+./hans/ActionSelectorSimple.py
+./hans/model/DeviceClass.py
+./hans/ApplicationSelectorWindow.py
+

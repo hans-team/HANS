@@ -907,6 +907,6 @@ LABEL="usbclass_ffh_end"
 ACTION=="add", SUBSYSTEMS=="usb", ENV{DEVTYPE}=="usb_device", \
     ENV{HANS_TAG}!="1", \
     ENV{HANS_TAG}="1", \
-	RUN+="/usr/bin/hans /sys$devpath"
+	RUN+="/usr/local/bin/hans-launcher /sys$devpath"
 
 

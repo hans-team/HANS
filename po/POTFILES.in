@@ -1,4 +1,4 @@
-./bin/hans.py
+./bin/hans
 ./hans/utils.py
 ./hans/FilechooserDialog.py
 ./hans/ActionSelectorSimple.py

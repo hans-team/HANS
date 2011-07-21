@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#Get all Seats from ConsoleKit to determinate how many sessions there in the system
+DBUS_SEATS=$(dbus-send --system \
+               --dest=org.freedesktop.ConsoleKit \
+               --type=method_call \
+               --print-reply \
+               /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.GetSeats)
+SEATS=$(echo $DBUS_SEATS | sed -n 's/.*array \[\(.*\)\].*/\1/gp')
+SEATS2=$(echo $SEATS | sed -n 's/object path//gp')
+#Convert string to array
+SEATS3=($SEATS2)
+
+for i in $(seq 0 $((${#SEATS3[*]} - 1))); do
+    SEATS3[$i]=$(echo ${SEATS3[$i]} | sed -n 's/"//gp')
+    DBUS_SESSIONS=$(dbus-send --system \
+               --dest=org.freedesktop.ConsoleKit \
+               --type=method_call \
+               --print-reply \
+               ${SEATS3[$i]} org.freedesktop.ConsoleKit.Seat.GetActiveSession 2>&1)
+    
+    #Check if sessions is active to launch HANS
+    if [[ ! $DBUS_SESSIONS =~ "no active" && ! -z $DBUS_SESSIONS ]]
+    then
+        SESSION=$(echo $DBUS_SESSIONS | sed -n 's/.*\"\(.*\)\".*/\1/gp')
+        #Get uid of user
+        UNIX_USER=$(dbus-send --system \
+               --dest=org.freedesktop.ConsoleKit \
+               --type=method_call \
+               --print-reply \
+               $SESSION org.freedesktop.ConsoleKit.Session.GetUnixUser)
+        
+        DBUS_X11_DISPLAY=$(dbus-send --system \
+               --dest=org.freedesktop.ConsoleKit \
+               --type=method_call \
+               --print-reply \
+               $SESSION org.freedesktop.ConsoleKit.Session.GetX11Display)
+        #Get username of uid user
+        USER=$(getent passwd $(echo $UNIX_USER | sed -n 's/.*uint32 \(.*\).*/\1/gp') | sed -e 's/\:.*//')
+        #Get user display
+        X11_DISPLAY=$(echo $DBUS_X11_DISPLAY | sed -n 's/.*string "\(.*\)".*/\1/gp')
+        
+        export DISPLAY=$X11_DISPLAY
+
+        . /etc/default/locale #Execute for assignament LANG environment
+        #Launch HANS in user session
+        sudo -iu $USER /usr/local/bin/hans -p $1 &>> /tmp/hans.log &
+        
+    fi
+done

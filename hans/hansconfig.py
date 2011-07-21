@@ -16,7 +16,7 @@ __all__ = [
 
 # Where your project will look for your data (for instance, images and ui
 # files). By default, this is ../data, relative your trunk layout
-__hans_data_directory__ = '../data/'
+__hans_data_directory__ = '/usr/local/share/hans/'
 __license__ = ''
 
 import os

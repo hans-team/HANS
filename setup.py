@@ -51,17 +51,17 @@ def update_data_path(prefix, oldvalue=None):
 oldvalue=update_data_path(prefix + '/share/hans/')
 
 
-class Clean(Command):
-    description = "custom clean command that forcefully removes dist/build directories and update data directory"
-    user_options = []
-    def initialize_options(self):
-        self.cwd = None
-    def finalize_options(self):
-        self.cwd = os.getcwd()
-    def run(self):
-        assert os.getcwd() == self.cwd, 'Must be in package root: %s' % self.cwd
-        os.system('rm -rf ./build ./dist')
-        update_data_path(prefix, oldvalue)
+#class Clean(Command):
+#    description = "custom clean command that forcefully removes dist/build directories and update data directory"
+#    user_options = []
+#    def initialize_options(self):
+#        self.cwd = None
+#    def finalize_options(self):
+#        self.cwd = os.getcwd()
+#    def run(self):
+#        assert os.getcwd() == self.cwd, 'Must be in package root: %s' % self.cwd
+#        os.system('rm -rf ./build ./dist')
+#        update_data_path(prefix, oldvalue)
 
 
 
@@ -115,7 +115,7 @@ setup(
                  
             "build" : build_extra.build_extra,
             "build_i18n" :  build_i18n.build_i18n,
-            "clean": [clean_i18n.clean_i18n,Clean],
+            "clean": clean_i18n.clean_i18n,#Clean],
             
         }
 )

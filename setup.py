@@ -109,7 +109,7 @@ setup(
             ('share/hans/db/actions', glob.glob('data/db/actions/*action')),
             ('share/hans/media', glob.glob('data/media/*')),
             ('share/hans/ui', glob.glob('data/ui/*')),
-            ('/etc/udev/rules.d', ['udev-rules/99-hans-usb.rules']),
+            ('/lib/udev/rules.d', ['udev-rules/99-hans-usb.rules']),
         ],
         cmdclass = { 
                  

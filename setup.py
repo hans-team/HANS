@@ -77,14 +77,14 @@ oldvalue=update_data_path(prefix + '/share/hans/')
 
 setup(
         name='hans',
-        version='0.1',
+        version='0.3',
         description='Hardware Actions and Notification System.',
         author='David Amian Valle',
         author_email='damian@emergya.com',
         url='https://launchpad.net/hans',
 
         classifiers=[
-            'Development Status :: 0.1 - Alpha',
+            'Development Status :: 0.3 - Alpha',
             'Environment :: Desktop Environment',
             'License :: OSI Approved :: GNU General Public License (GPL)',
             'Operating System :: POSIX',

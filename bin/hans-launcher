@@ -41,10 +41,10 @@ for i in $(seq 0 $((${#SEATS3[*]} - 1))); do
         X11_DISPLAY=$(echo $DBUS_X11_DISPLAY | sed -n 's/.*string "\(.*\)".*/\1/gp')
         
         export DISPLAY=$X11_DISPLAY
-
-        . /etc/default/locale #Execute for assignament LANG environment
-        #Launch HANS in user session
-        sudo -iu $USER /usr/local/bin/hans -p $1 &>> /tmp/hans.log &
+        DEFLANG=$(cat /etc/default/locale | awk -F'=' '{print $2}' | sed 's/\"//g')
+        export LANG=$DEFLANG
+	#Launch HANS in user session
+        sudo -Eu $USER /usr/bin/hans -p $1 &>> /tmp/hans.log &
         
     fi
 done
